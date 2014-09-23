@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">KakaoStorySample</string>
+    <string name="user_check_button">is story user</string>
+    <string name="profile_button">profile</string>
+    <string name="note_post_button">post note</string>
+    <string name="photo_post_button">post photo</string>
+    <string name="link_post_button">post link</string>
+    <string name="get_post_button">get last post</string>
+    <string name="get_posts_button">get recent posts</string>
+    <string name="birthday_label">birthday</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="checkWannaShareText">Do you wanna share your kakao story?</string>
+    <string name="positiveShare">Yes</string>
+    <string name="negativeShare">No</string>
+
+
+</resources>
