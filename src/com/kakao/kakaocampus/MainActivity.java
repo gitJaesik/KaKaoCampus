@@ -76,6 +76,20 @@ public class MainActivity extends Activity {
             }
         });
 
+        // TODO access to the database to get all data
+        // 최근 포스팅 정보.
+        Button goToAllBoard = (Button) findViewById(R.id.gotoallboard);
+        goToAllBoard.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            	Intent intent = new Intent(getApplicationContext(), AllDataActivity.class);	
+            	// I don't know why I can't use this
+            	startActivity(intent);
+            	finish();
+            }
+        });
+
         // 포스팅 동의 파트
         openAlert();
 	}
@@ -87,6 +101,9 @@ public class MainActivity extends Activity {
 	    final Map<String, String> properties = new HashMap<String, String>();
 	    properties.put("nickname", "피재식");
 	    properties.put("university", "soongsil");
+	    properties.put("phone", "01020544620");
+	    properties.put("email", "maguire1815@gmail.com");
+	    properties.put("student_id", "20092469");
 
 	    UserManagement.requestUpdateProfile(new UpdateProfileResponseCallback() {
 	        @Override

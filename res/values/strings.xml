@@ -16,6 +16,6 @@
     <string name="checkWannaShareText">Do you wanna share your kakao story?</string>
     <string name="positiveShare">Yes</string>
     <string name="negativeShare">No</string>
-
+    <string name="title_activity_all_data">AllDataActivity</string>
 
 </resources>
