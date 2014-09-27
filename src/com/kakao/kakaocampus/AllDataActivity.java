@@ -134,10 +134,8 @@ public class AllDataActivity extends ListActivity {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             // getting JSON string from URL
 
-            Log.i("AllDataActivity", "Before send json");
             JSONObject json = jParser.makeHttpRequest(url_all_data, "POST", params);
             //JSONObject json = jParser.makeHttpRequest(url_all_data, "GET", params);
-            Log.i("AllDataActivity", "after send json");
  
             // Check your log cat for JSON reponse
             Log.d("All Data: ", json.toString());

@@ -6,9 +6,11 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +25,7 @@ import com.kakao.KakaoStoryMyStoriesParamBuilder;
 import com.kakao.KakaoStoryService;
 import com.kakao.KakaoStoryService.StoryType;
 import com.kakao.LogoutResponseCallback;
+import com.kakao.MeResponseCallback;
 import com.kakao.MyStoryInfo;
 import com.kakao.NoteKakaoStoryPostParamBuilder;
 import com.kakao.UpdateProfileResponseCallback;
@@ -30,28 +33,75 @@ import com.kakao.UserManagement;
 import com.kakao.UserProfile;
 import com.kakao.helper.Logger;
 
+// To reduce code 
+//import com.kakao.kakaocampus.KakaoStoryMainActivity;
+
 public class MainActivity extends Activity {
     private String lastMyStoryId;
-    //private String jaesikStoryId = "_H5Pf5.jB7s4CCoQW0";
     private String jaesikStoryId = "_H5Pf5.IAeVGI06qW0";
     private final String execParam = "place=1111";
     private final String noteContent = "Enjoy Your Campus Life\n" 
     									+ "in KAKAO CAMPUS APP!!!! #카카오캠퍼스";
     private final String marketParam = "referrer=kakaostory";
     private UserProfile userProfile;
+    private String university;
+    private String phone;
+    private String email;
+    private String student_id;
+    private String null_test;
+    private ProgressDialog pDialog;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		requestUpdateProfile();
 		
+
+		//requestUpdateProfile();
+		//위의 함수는 아이디 체크를 한 후에 콜함 
+		
+		//checkKakaoInfo();
+
 		initView();
+
+	}
+
+	public void checkKakaoInfo(){
+		//onClickProfile();
+		Log.i("MainActivity", "TEST Log1");
+		callRequestMe();
+		
+		try{
+			Thread.sleep(2000);
+		} catch(InterruptedException ex){
+			Thread.currentThread().interrupt();
+		}
+
+		Log.i("MainActivity", "TEST Log3");
+		/*
+		if(university != null && phone != null & email != null && student_id != null){
+			Log.i("MainActivity", "It's okay. second test was passed");
+		}else{
+			Intent intent = new Intent(getApplicationContext(), NewKaCamProfileActivity.class);	
+			startActivity(intent);
+			finish();
+		}
+		*/
+		Log.i("MainActivity", "TEST Log5");
 
 	}
 	
 	// init view code ( button and alertDialog ) 
 	public void initView(){
+
+		initButtonView();
+
+        // 포스팅 동의 파트
+        openAlert();
+	}
+
+	public void initButtonView(){
 		
 		Button logoutButton = (Button) findViewById(R.id.logout_button);
         logoutButton.setOnClickListener(new OnClickListener() {
@@ -90,8 +140,81 @@ public class MainActivity extends Activity {
             }
         });
 
-        // 포스팅 동의 파트
-        openAlert();
+        // TODO access to the database to get all data
+        // 최근 포스팅 정보.
+        Button userUpdate = (Button) findViewById(R.id.userUpdate);
+        userUpdate.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            	callRequestMe();
+            }
+        });
+	}
+
+
+	private void callRequestMe() {
+	    UserManagement.requestMe(new MeResponseCallback() {
+	        @Override
+	        protected void onSuccess(final UserProfile userProfile) {
+	            // 성공.
+	            //showUserProfile(userProfile);
+	        	Map<String, String> kacamProperties = userProfile.getProperties();
+
+	        	Log.i("MainActivity", "TEST Log2");
+                null_test = kacamProperties.get("null_test");
+                university = kacamProperties.get("university");
+                phone = kacamProperties.get("phone");
+                email = kacamProperties.get("email");
+                student_id = kacamProperties.get("student_id");
+	        	
+                Log.i("MainActivity", "TEST Log4");
+	        	if(!kacamProperties.get("null_test").isEmpty() && !kacamProperties.get("phone").isEmpty() && !kacamProperties.get("email").isEmpty() && !kacamProperties.get("student_id").isEmpty() ){
+	        		Log.i("MainActivity", "It's okay. first test was passed");
+	        	}else{
+	        		Intent intent = new Intent(getApplicationContext(), NewKaCamProfileActivity.class);	
+	        		startActivity(intent);
+	        		finish();
+	        	}
+	        	
+                //Log.i("AllDataActivity", "Get Profile From Kakao : " + userProfile.toString());
+	        	///*
+                Log.i("MainActivity", "Get Profile From Kakao : " + kacamProperties.get("null_test"));
+                Log.i("MainActivity", "Get Profile From Kakao : " + kacamProperties.get("phone"));
+                Log.i("MainActivity", "Get Profile From Kakao : " + kacamProperties.get("email"));
+                Log.i("MainActivity", "Get Profile From Kakao : " + kacamProperties.get("student_id"));
+                //*/
+	        	/*
+                if(kacamProperties.get("university") == null){
+                	Log.i("MainActivity", "It's null");
+                }else{
+                	Log.i("MainActivity", "It's not null");
+                }
+                if(kacamProperties.get("null_test") == null){
+                	Log.i("MainActivity", "It's null");
+                }else{
+                	Log.i("MainActivity", "It's not null");
+                }
+                */
+	        }
+
+	        @Override
+	        protected void onNotSignedUp() {
+	            // 가입 페이지로 이동
+	            //redirectSignupActivity();
+	        }
+
+	        @Override
+	        protected void onSessionClosedFailure(final APIErrorResult errorResult) {
+	            // 다시 로그인 시도
+	            redirectLoginActivity();
+	        }
+
+	        @Override
+	        protected void onFailure(final APIErrorResult errorResult) {
+	            // 실패
+	            Toast.makeText(getApplicationContext(), "failed to update profile. msg = " + errorResult, Toast.LENGTH_LONG).show();
+	        }
+	    });
 	}
 
 
@@ -129,7 +252,6 @@ public class MainActivity extends Activity {
 
 
 	public void openAlert(){
-
 	      AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 	      alertDialogBuilder.setMessage(R.string.checkWannaShareText);
 	      alertDialogBuilder.setPositiveButton(R.string.positiveShare, 
@@ -253,6 +375,7 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
         }
     }
+
 
 	
 	/*

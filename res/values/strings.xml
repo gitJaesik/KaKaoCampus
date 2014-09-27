@@ -17,5 +17,6 @@
     <string name="positiveShare">Yes</string>
     <string name="negativeShare">No</string>
     <string name="title_activity_all_data">AllDataActivity</string>
+    <string name="title_activity_new_ka_cam_profile">NewKaCamProfileActivity</string>
 
 </resources>

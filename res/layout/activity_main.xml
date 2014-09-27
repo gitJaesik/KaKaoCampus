@@ -68,7 +68,13 @@
             android:id="@+id/gotoallboard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="GetData" />
+
+        <Button
+            android:id="@+id/userUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="userInfoCheck" />
 
     </LinearLayout>
 
