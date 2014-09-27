@@ -1,22 +1,22 @@
 package com.kakao.kakaocampus;
 
-import java.util.ArrayList;
-import java.util.List;
- 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
- 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.kakao.APIErrorResult;
+import com.kakao.UpdateProfileResponseCallback;
+import com.kakao.UserManagement;
+import com.kakao.UserProfile;
  
 public class NewKaCamProfileActivity extends Activity {
  
@@ -24,9 +24,11 @@ public class NewKaCamProfileActivity extends Activity {
     private ProgressDialog pDialog;
  
     JSONParser jsonParser = new JSONParser();
-    EditText inputName;
-    EditText inputPrice;
-    EditText inputDesc;
+    EditText inputUniversity;
+    EditText inputPhone;
+    EditText inputEmail;
+    EditText inputStudent_Id;
+    private UserProfile userProfile;
  
     // url to create new product
     //private static String url_create_product = "http://api.androidhive.info/android_connect/create_product.php";
@@ -40,28 +42,77 @@ public class NewKaCamProfileActivity extends Activity {
         setContentView(R.layout.activity_new_ka_cam_profile);
  
         // Edit Text
-        inputName = (EditText) findViewById(R.id.inputName);
-        inputPrice = (EditText) findViewById(R.id.inputPrice);
-        inputDesc = (EditText) findViewById(R.id.inputDesc);
+        inputUniversity = (EditText) findViewById(R.id.inputUniversity);
+        inputPhone = (EditText) findViewById(R.id.inputPhone);
+        inputEmail = (EditText) findViewById(R.id.inputEmail);
+        inputStudent_Id = (EditText) findViewById(R.id.inputStudent_Id);
  
         // Create button
-        Button btnCreateKaCamProfile = (Button) findViewById(R.id.btnCreateKaCamProfile);
+        Button btnUpdateKaCamProfile = (Button) findViewById(R.id.updateKaCamProfile);
  
         // button click event
-        btnCreateKaCamProfile.setOnClickListener(new View.OnClickListener() {
+        btnUpdateKaCamProfile.setOnClickListener(new View.OnClickListener() {
  
             @Override
             public void onClick(View view) {
                 // creating new product in background thread
-                new CreateNewKaCamProfile().execute();
+                //new UpdateKaCamProfile().execute();
+            	requestUpdateProfile();
             }
         });
     }
+	// Update UserProfile for input University, Phone, Email, and StudentID
+    
+	private void requestUpdateProfile() {
+		String university = inputUniversity.getText().toString();
+		String phone = inputPhone.getText().toString();
+		String email = inputEmail.getText().toString();
+		String student_id = inputStudent_Id.getText().toString();
+
+        userProfile = UserProfile.loadFromCache();
+	    final Map<String, String> properties = new HashMap<String, String>();
+	    properties.put("university", university);
+	    properties.put("phone", phone);
+	    properties.put("email", email);
+	    properties.put("student_id", student_id);
+
+	    /*
+	    properties.put("nickname", "피재식");
+	    properties.put("university", "soongsil");
+	    properties.put("phone", "01020544620");
+	    properties.put("email", "maguire1815@gmail.com");
+	    properties.put("student_id", "20092469");
+	    */
+
+	    UserManagement.requestUpdateProfile(new UpdateProfileResponseCallback() {
+	        @Override
+	        protected void onSuccess(final long userId) {
+	            UserProfile.updateUserProfile(userProfile, properties);
+	            if (userProfile != null)
+	                userProfile.saveUserToCache();
+                    //Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                    //startActivity(i);
+                    finish();
+	            //showProfile();
+	        }
+
+	        @Override
+	        protected void onSessionClosedFailure(final APIErrorResult errorResult) {
+	            //redirectLoginActivity();
+	        }
+
+	        @Override
+	        protected void onFailure(final APIErrorResult errorResult) {
+	            Toast.makeText(getApplicationContext(), "failed to update profile. msg = " + errorResult, Toast.LENGTH_LONG).show();
+	        }
+	    }, properties);
+	}
+	
 
     /**
      * Background Async Task to Create new product
      * */
-    class CreateNewKaCamProfile extends AsyncTask<String, String, String> {
+    class UpdateKaCamProfile extends AsyncTask<String, String, String> {
  
         /**
          * Before starting background thread Show Progress Dialog
@@ -80,16 +131,48 @@ public class NewKaCamProfileActivity extends Activity {
          * Creating product
          * */
         protected String doInBackground(String... args) {
-            String name = inputName.getText().toString();
-            String price = inputPrice.getText().toString();
-            String description = inputDesc.getText().toString();
- 
+            String university = inputUniversity.getText().toString();
+            String phone = inputPhone.getText().toString();
+            String email = inputEmail.getText().toString();
+            String student_id = inputStudent_Id.getText().toString();
+
+            userProfile = UserProfile.loadFromCache();
+            final Map<String, String> properties = new HashMap<String, String>();
+            //properties.put("nickname", "피재식");
+            properties.put("university", university);
+            properties.put("phone", phone);
+            properties.put("email", email);
+            properties.put("student_id", student_id);
+
+            UserManagement.requestUpdateProfile(new UpdateProfileResponseCallback() {
+            	@Override
+            	protected void onSuccess(final long userId) {
+            		UserProfile.updateUserProfile(userProfile, properties);
+            		if (userProfile != null)
+            			userProfile.saveUserToCache();
+            		//showProfile();
+            	}
+
+            	@Override
+            	protected void onSessionClosedFailure(final APIErrorResult errorResult) {
+            		//redirectLoginActivity();
+            	}
+
+            	@Override
+            	protected void onFailure(final APIErrorResult errorResult) {
+            		Toast.makeText(getApplicationContext(), "failed to update profile. msg = " + errorResult, Toast.LENGTH_LONG).show();
+            	}
+            }, properties);
+
+            /*
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("name", name));
-            params.add(new BasicNameValuePair("price", price));
-            params.add(new BasicNameValuePair("description", description));
- 
+            params.add(new BasicNameValuePair("name", university));
+            params.add(new BasicNameValuePair("price", phone));
+            params.add(new BasicNameValuePair("description", email));
+            params.add(new BasicNameValuePair("description", student_id));
+             */
+
             // getting JSON Object
             // Note that create product url accepts POST method
             // Sending POST part

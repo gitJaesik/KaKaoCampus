@@ -138,7 +138,7 @@ public final class R {
 		public static final int holo_dark = 0x7f05001d;
 		public static final int holo_light = 0x7f05001e;
 		public static final int hybrid = 0x7f05001c;
-		public static final int kakao_login_activity_progress_bar = 0x7f050059;
+		public static final int kakao_login_activity_progress_bar = 0x7f05005a;
 		public static final int match_parent = 0x7f050024;
 		public static final int monochrome = 0x7f05002b;
 		public static final int none = 0x7f050010;

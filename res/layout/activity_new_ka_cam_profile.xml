@@ -4,34 +4,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
  
-    <!-- Name Label -->
+    <!-- university Label -->
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Product Name"
+        android:text="University : "
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
-        android:paddingTop="10dip"
-        android:textSize="17dip"/>
+        android:paddingTop="10dip" />
+
  
-    <!-- Input Name -->
-    <EditText android:id="@+id/inputName"
+    <!-- Input university -->
+    <EditText android:id="@+id/inputUniversity"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
         android:layout_marginBottom="15dip"
         android:singleLine="true"/>
  
-    <!-- Price Label -->
+    <!-- phone Label -->
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Price"
+        android:text="Phone"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
         android:textSize="17dip"/>
- 
-    <!-- Input Price -->
-    <EditText android:id="@+id/inputPrice"
+
+    <!-- Input Phone -->
+    <EditText android:id="@+id/inputPhone"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
@@ -39,29 +39,46 @@
         android:singleLine="true"
         android:inputType="numberDecimal"/>
  
-    <!-- Description Label -->
+    <!-- Email Label -->
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Description"
+        android:text="Email"
         android:paddingLeft="10dip"
         android:paddingRight="10dip"
         android:paddingTop="10dip"
         android:textSize="17dip"/>
  
-    <!-- Input description -->
-    <EditText android:id="@+id/inputDesc"
+    <!-- Input email -->
+    <EditText android:id="@+id/inputEmail"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
         android:layout_marginBottom="15dip"
-        android:lines="4"
         android:gravity="top"/>
  
-    <!-- Button Create KaCamProfile -->
-    <Button android:id="@+id/btnCreateKaCamProfile"
+    <!-- Student_ID Label -->
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Student_Id"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip"
+        android:textSize="17dip"/>
+
+    <!-- Input Student_Id -->
+    <EditText android:id="@+id/inputStudent_Id"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Create KaCamProfile"/>
+        android:layout_margin="5dip"
+        android:layout_marginBottom="15dip"
+        android:singleLine="true"
+        android:inputType="numberDecimal"/>
+
+    <!-- Button Create KaCamProfile -->
+    <Button android:id="@+id/updateKaCamProfile"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Update University Authorization"/>
  
 </LinearLayout>
 

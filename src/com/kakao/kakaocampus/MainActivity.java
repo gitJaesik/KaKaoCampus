@@ -58,8 +58,9 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 
-		//requestUpdateProfile();
+		//equestUpdateProfile();
 		//위의 함수는 아이디 체크를 한 후에 콜함 
+		callRequestMe();
 		
 		//checkKakaoInfo();
 
@@ -136,7 +137,7 @@ public class MainActivity extends Activity {
             	Intent intent = new Intent(getApplicationContext(), AllDataActivity.class);	
             	// I don't know why I can't use this
             	startActivity(intent);
-            	finish();
+            	//finish();
             }
         });
 
@@ -168,12 +169,13 @@ public class MainActivity extends Activity {
                 student_id = kacamProperties.get("student_id");
 	        	
                 Log.i("MainActivity", "TEST Log4");
-	        	if(!kacamProperties.get("null_test").isEmpty() && !kacamProperties.get("phone").isEmpty() && !kacamProperties.get("email").isEmpty() && !kacamProperties.get("student_id").isEmpty() ){
+	        	if(kacamProperties.get("university") != null && kacamProperties.get("phone") != null && kacamProperties.get("email") != null && kacamProperties.get("student_id") != null){
 	        		Log.i("MainActivity", "It's okay. first test was passed");
 	        	}else{
 	        		Intent intent = new Intent(getApplicationContext(), NewKaCamProfileActivity.class);	
 	        		startActivity(intent);
-	        		finish();
+	        		//finish();
+	        		// no closing this activity
 	        	}
 	        	
                 //Log.i("AllDataActivity", "Get Profile From Kakao : " + userProfile.toString());
@@ -218,36 +220,7 @@ public class MainActivity extends Activity {
 	}
 
 
-	// Update UserProfile for input University, Phone, Email, and StudentID
-	private void requestUpdateProfile() {
-        userProfile = UserProfile.loadFromCache();
-	    final Map<String, String> properties = new HashMap<String, String>();
-	    properties.put("nickname", "피재식");
-	    properties.put("university", "soongsil");
-	    properties.put("phone", "01020544620");
-	    properties.put("email", "maguire1815@gmail.com");
-	    properties.put("student_id", "20092469");
 
-	    UserManagement.requestUpdateProfile(new UpdateProfileResponseCallback() {
-	        @Override
-	        protected void onSuccess(final long userId) {
-	            UserProfile.updateUserProfile(userProfile, properties);
-	            if (userProfile != null)
-	                userProfile.saveUserToCache();
-	            //showProfile();
-	        }
-
-	        @Override
-	        protected void onSessionClosedFailure(final APIErrorResult errorResult) {
-	            redirectLoginActivity();
-	        }
-
-	        @Override
-	        protected void onFailure(final APIErrorResult errorResult) {
-	            Toast.makeText(getApplicationContext(), "failed to update profile. msg = " + errorResult, Toast.LENGTH_LONG).show();
-	        }
-	    }, properties);
-	}
 
 
 
