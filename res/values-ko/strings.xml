@@ -12,4 +12,6 @@
     <string name="checkWannaShareText">당신의 포스팅을 카카오 캠퍼스에 공유하시겠습니까? </string>
     <string name="positiveShare">네,</string>
     <string name="negativeShare">아니요,</string>
+    <string name="alert_content">데이터를 보내기 위해서는 동의를 하셔야 합니다. </string>
+    <string name="putDataString">원격 데이터베이스에 데이터를 정리해서 입력중...</string>
 </resources>

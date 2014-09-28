@@ -16,7 +16,10 @@
     <string name="checkWannaShareText">Do you wanna share your kakao story?</string>
     <string name="positiveShare">Yes</string>
     <string name="negativeShare">No</string>
+    <string name="putDataString">Put..ing data to remote database</string>
+    <string name="alert_content">To send data to remote database, you should agree this</string>
     <string name="title_activity_all_data">AllDataActivity</string>
     <string name="title_activity_new_ka_cam_profile">NewKaCamProfileActivity</string>
+    <string name="title_activity_put_data_to_remote">PutDataToRemoteActivity</string>
 
 </resources>

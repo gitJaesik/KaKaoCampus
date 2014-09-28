@@ -37,44 +37,11 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <ScrollView
-                android:id="@+id/scrollView1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical" >
-
-                    <EditText
-                        android:id="@+id/editText1"
-                        android:layout_width="match_parent"
-                        android:layout_height="196dp"
-                        android:ems="10"
-                        android:inputType="textMultiLine" />
-                </LinearLayout>
-
-            </ScrollView>
-
-        </LinearLayout>
-
         <Button
             android:id="@+id/gotoallboard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="GetData" />
-
-        <Button
-            android:id="@+id/userUpdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="userInfoCheck" />
 
     </LinearLayout>
 

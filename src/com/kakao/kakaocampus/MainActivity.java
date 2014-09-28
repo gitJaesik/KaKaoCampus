@@ -1,7 +1,6 @@
 package com.kakao.kakaocampus;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
@@ -28,7 +27,6 @@ import com.kakao.LogoutResponseCallback;
 import com.kakao.MeResponseCallback;
 import com.kakao.MyStoryInfo;
 import com.kakao.NoteKakaoStoryPostParamBuilder;
-import com.kakao.UpdateProfileResponseCallback;
 import com.kakao.UserManagement;
 import com.kakao.UserProfile;
 import com.kakao.helper.Logger;
@@ -49,6 +47,7 @@ public class MainActivity extends Activity {
     private String email;
     private String student_id;
     private String null_test;
+    private int alertCheck;
     private ProgressDialog pDialog;
 
 
@@ -57,42 +56,14 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-
-		//equestUpdateProfile();
-		//위의 함수는 아이디 체크를 한 후에 콜함 
+		// Call user information from kakao;
+		//In this methods, it'll call other activity if there are no university info
 		callRequestMe();
-		
-		//checkKakaoInfo();
 
 		initView();
 
 	}
 
-	public void checkKakaoInfo(){
-		//onClickProfile();
-		Log.i("MainActivity", "TEST Log1");
-		callRequestMe();
-		
-		try{
-			Thread.sleep(2000);
-		} catch(InterruptedException ex){
-			Thread.currentThread().interrupt();
-		}
-
-		Log.i("MainActivity", "TEST Log3");
-		/*
-		if(university != null && phone != null & email != null && student_id != null){
-			Log.i("MainActivity", "It's okay. second test was passed");
-		}else{
-			Intent intent = new Intent(getApplicationContext(), NewKaCamProfileActivity.class);	
-			startActivity(intent);
-			finish();
-		}
-		*/
-		Log.i("MainActivity", "TEST Log5");
-
-	}
-	
 	// init view code ( button and alertDialog ) 
 	public void initView(){
 
@@ -100,6 +71,8 @@ public class MainActivity extends Activity {
 
         // 포스팅 동의 파트
         openAlert();
+        //openAlert2();
+        //checkAlertAgree();
 	}
 
 	public void initButtonView(){
@@ -135,21 +108,10 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
             	Intent intent = new Intent(getApplicationContext(), AllDataActivity.class);	
-            	// I don't know why I can't use this
             	startActivity(intent);
-            	//finish();
             }
         });
 
-        // TODO access to the database to get all data
-        // 최근 포스팅 정보.
-        Button userUpdate = (Button) findViewById(R.id.userUpdate);
-        userUpdate.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            	callRequestMe();
-            }
-        });
 	}
 
 
@@ -158,45 +120,16 @@ public class MainActivity extends Activity {
 	        @Override
 	        protected void onSuccess(final UserProfile userProfile) {
 	            // 성공.
-	            //showUserProfile(userProfile);
 	        	Map<String, String> kacamProperties = userProfile.getProperties();
 
-	        	Log.i("MainActivity", "TEST Log2");
-                null_test = kacamProperties.get("null_test");
-                university = kacamProperties.get("university");
-                phone = kacamProperties.get("phone");
-                email = kacamProperties.get("email");
-                student_id = kacamProperties.get("student_id");
-	        	
-                Log.i("MainActivity", "TEST Log4");
 	        	if(kacamProperties.get("university") != null && kacamProperties.get("phone") != null && kacamProperties.get("email") != null && kacamProperties.get("student_id") != null){
-	        		Log.i("MainActivity", "It's okay. first test was passed");
+	        		Log.i("MainActivity", "사용자관리에 대학정보 입력 되어있음을 확인");
 	        	}else{
 	        		Intent intent = new Intent(getApplicationContext(), NewKaCamProfileActivity.class);	
 	        		startActivity(intent);
-	        		//finish();
-	        		// no closing this activity
 	        	}
 	        	
-                //Log.i("AllDataActivity", "Get Profile From Kakao : " + userProfile.toString());
-	        	///*
-                Log.i("MainActivity", "Get Profile From Kakao : " + kacamProperties.get("null_test"));
-                Log.i("MainActivity", "Get Profile From Kakao : " + kacamProperties.get("phone"));
-                Log.i("MainActivity", "Get Profile From Kakao : " + kacamProperties.get("email"));
-                Log.i("MainActivity", "Get Profile From Kakao : " + kacamProperties.get("student_id"));
-                //*/
-	        	/*
-                if(kacamProperties.get("university") == null){
-                	Log.i("MainActivity", "It's null");
-                }else{
-                	Log.i("MainActivity", "It's not null");
-                }
-                if(kacamProperties.get("null_test") == null){
-                	Log.i("MainActivity", "It's null");
-                }else{
-                	Log.i("MainActivity", "It's not null");
-                }
-                */
+                //Log.i("MainActivity", "Get Profile From Kakao : " + userProfile.toString());
 	        }
 
 	        @Override
@@ -219,10 +152,27 @@ public class MainActivity extends Activity {
 	    });
 	}
 
+	public void openAlert2(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(R.string.alert_content) .setTitle(R.string.checkWannaShareText);
 
-
-
-
+		builder.setPositiveButton(R.string.positiveShare, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				// User clicked OK button
+	        	 Intent putDataToRemoteActivity1 = new Intent(getApplicationContext(), PutDataToRemoteActivity.class);
+	        	 startActivity(putDataToRemoteActivity1);
+			}
+		});
+		builder.setNegativeButton(R.string.negativeShare, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				// User cancelled the dialog
+				Log.i("new alert", "select No");
+			}
+		});
+		
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	}
 
 	public void openAlert(){
 	      AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -232,13 +182,24 @@ public class MainActivity extends Activity {
 			
 	         @Override
 	         public void onClick(DialogInterface arg0, int arg1) {
+	        	 Intent putDataToRemoteActivity1 = new Intent(getApplicationContext(), PutDataToRemoteActivity.class);
+	        	 //putDataToRemoteActivity1.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+	        	 // For flag
+	        	 startActivity(putDataToRemoteActivity1);
 	        	 /*
 	            Intent positveActivity = new Intent(getApplicationContext(),com.example.alertdialog.PositiveActivity.class);
 	            startActivity(positveActivity);
 	            */
-	        	 Toast.makeText(getApplicationContext(), "Positive", Toast.LENGTH_SHORT).show();
+	        	 Toast.makeText(getApplicationContext(), "예를 클릭하였습니다.", Toast.LENGTH_SHORT).show();
+
+	        	 //alertCheck = 1;
+	        	 //Log.i("MainActivity", alertCheck + " ");
+
+
+	        	 /*
 	        	 final NoteKakaoStoryPostParamBuilder postParamBuilder = new NoteKakaoStoryPostParamBuilder(noteContent);
 	        	 requestPost(StoryType.NOTE, postParamBuilder);
+	        	 */
 	         }
 	      });
 	      alertDialogBuilder.setNegativeButton(R.string.negativeShare, 
@@ -250,14 +211,24 @@ public class MainActivity extends Activity {
 	            Intent negativeActivity = new Intent(getApplicationContext(),com.example.alertdialog.NegativeActivity.class);
 	            startActivity(negativeActivity);
 	            */
-	        	 Toast.makeText(getApplicationContext(), "negative", Toast.LENGTH_SHORT).show();
+	        	 //Toast.makeText(getApplicationContext(), "아니요를 클릭하셨습니다.", Toast.LENGTH_SHORT).show();
 			 }
 	      });
 		    
 	      AlertDialog alertDialog = alertDialogBuilder.create();
 	      alertDialog.show();
-		    
    }
+	
+	/*
+	public void checkAlertAgree(){
+		Log.i("MainActivity", "드루오기 전");
+		if(alertCheck == 1){
+	        Log.i("MainActivity", "드루와드루와");
+			Intent putDataToRemoteActivity = new Intent(getApplicationContext(), PutDataToRemoteActivity.class);
+			startActivity(putDataToRemoteActivity);
+		}
+	}
+	*/
 
 	   @Override
    public boolean onCreateOptionsMenu(Menu menu) {
@@ -294,15 +265,7 @@ public class MainActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "succeeded to get my posts from KakaoStory." +
                     "\ncount=" + myStories.length +
                     "\nstories=" + Arrays.toString(myStories), Toast.LENGTH_SHORT).show();
-                    //*/
-            	/*
-            	TextView setT = (TextView) findViewById(R.id.editText1);
-            	setT.setText(Arrays.toString(myStories));
-            	*/
-
-            	//public static final int editText1=0x7f070018;
-
-
+                    // myStories는 배열이다. 배열에 있는 데이터를 가져와서 원격 데이터베이스에 저장하자.
             }
         }, parameters);
     }
@@ -349,26 +312,4 @@ public class MainActivity extends Activity {
         }
     }
 
-
-	
-	/*
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-	*/
 }
