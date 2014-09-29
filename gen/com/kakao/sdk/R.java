@@ -405,7 +405,7 @@ public final class R {
 		public static final int icon = 0x7f05003c;
 		public static final int ifRoom = 0x7f05000a;
 		public static final int image = 0x7f050039;
-		public static final int kakao_login_activity_progress_bar = 0x7f050057;
+		public static final int kakao_login_activity_progress_bar = 0x7f050059;
 		public static final int listMode = 0x7f050001;
 		public static final int list_item = 0x7f05003b;
 		public static final int match_parent = 0x7f050024;
@@ -476,9 +476,9 @@ public final class R {
 		public static final int abc_search_dropdown_item_icons_2line = 0x7f030015;
 		public static final int abc_search_view = 0x7f030016;
 		public static final int abc_simple_decor = 0x7f030017;
-		public static final int kakao_internal_login_activity = 0x7f03001c;
-		public static final int kakao_login_layout = 0x7f03001e;
-		public static final int support_simple_spinner_dropdown_item = 0x7f030022;
+		public static final int kakao_internal_login_activity = 0x7f03001e;
+		public static final int kakao_login_layout = 0x7f030020;
+		public static final int support_simple_spinner_dropdown_item = 0x7f030024;
 	}
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f0a0001;

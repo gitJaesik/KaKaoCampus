@@ -107,7 +107,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-            	Intent intent = new Intent(getApplicationContext(), AllDataActivity.class);	
+            	Intent intent = new Intent(getApplicationContext(), ActionTab.class);	
             	startActivity(intent);
             }
         });
