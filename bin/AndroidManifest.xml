@@ -12,7 +12,7 @@
 
     <application
         android:name="com.kakao.template.loginbase.GlobalApplication"
-        android:icon="@drawable/kakaostory_sample_icon"
+        android:icon="@drawable/kakaocampus"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat" >
         <activity android:name=".KakaoStoryLoginActivity" >
@@ -60,6 +60,7 @@
             android:label="@string/title_activity_put_data_to_remote" >
         </activity>
         <activity android:name="ActionTab"></activity>
+        <activity android:name="TabmenuActivity"></activity>
     </application>
 
 </manifest>

@@ -49,7 +49,7 @@ public class PutDataToRemoteActivity extends ActionBarActivity {
 	private ProgressDialog pDialog;
 
 	private String jsonMyStoriesInfo;
-	
+
 	private String usernameIntent;
 
 	@Override
@@ -204,56 +204,67 @@ public class PutDataToRemoteActivity extends ActionBarActivity {
 																		// be
 																		// repeat
 
-									// #학교, #학부, #맛집, #대나무숲, #무럭무럭, #놀자, #꽃보다여행, #대학지침서, #나두근두근해, #너네이거알아?, #나요즘힘들어, #나이거싫어
+									// #학교, #학부, #맛집, #대나무숲, #무럭무럭, #놀자, #꽃보다여행,
+									// #대학지침서, #나두근두근해, #너네이거알아?, #나요즘힘들어,
+									// #나이거싫어
 									// 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
-									
-									if(myStoryTem.getContent().contains("#학교")){
+
+									if (myStoryTem.getContent().contains("#학교")) {
 										boardKind = "1";
 									}
 
-									if(myStoryTem.getContent().contains("#학부")){
+									if (myStoryTem.getContent().contains("#학부")) {
 										boardKind = "2";
 									}
 
-									if(myStoryTem.getContent().contains("#맛집")){
+									if (myStoryTem.getContent().contains("#맛집")) {
 										boardKind = "3";
 									}
-									if(myStoryTem.getContent().contains("#대나무숲")){
+									if (myStoryTem.getContent().contains(
+											"#대나무숲")) {
 										boardKind = "4";
 									}
-									if(myStoryTem.getContent().contains("#무럭무럭")){
+									if (myStoryTem.getContent().contains(
+											"#무럭무럭")) {
 										boardKind = "5";
 									}
-									if(myStoryTem.getContent().contains("#놀자")){
+									if (myStoryTem.getContent().contains("#놀자")) {
 										boardKind = "6";
 									}
-									if(myStoryTem.getContent().contains("#꽅보다여행")){
+									if (myStoryTem.getContent().contains(
+											"#꽅보다여행")) {
 										boardKind = "7";
 									}
-									if(myStoryTem.getContent().contains("#대학지침서")){
+									if (myStoryTem.getContent().contains(
+											"#대학지침서")) {
 										boardKind = "8";
 									}
-									if(myStoryTem.getContent().contains("#나두근두근해")){
+									if (myStoryTem.getContent().contains(
+											"#나두근두근해")) {
 										boardKind = "9";
 									}
-									if(myStoryTem.getContent().contains("#너네이거알아?")){
+									if (myStoryTem.getContent().contains(
+											"#너네이거알아?")) {
 										boardKind = "10";
 									}
-									if(myStoryTem.getContent().contains("#나요즘힘들어")){
+									if (myStoryTem.getContent().contains(
+											"#나요즘힘들어")) {
 										boardKind = "11";
 									}
-									if(myStoryTem.getContent().contains("#나이거싫어")){
+									if (myStoryTem.getContent().contains(
+											"#나이거싫어")) {
 										boardKind = "12";
 									}
 
 									try {
 										// Id 및 내용 입력 파트
-										joIn.put("usercontents", myStoryTem.getContent());
+										joIn.put("usercontents",
+												myStoryTem.getContent());
 										joIn.put("kind", boardKind);
-										
-										if(boardKind == "4"){
+
+										if (boardKind == "4") {
 											joIn.put("username", null);
-										}else{
+										} else {
 											joIn.put("username", usernameIntent);
 										}
 
@@ -396,6 +407,9 @@ public class PutDataToRemoteActivity extends ActionBarActivity {
 					"on Post Execute in CreateNewProduct class");
 			// dismiss the dialog once done
 			pDialog.dismiss();
+			Intent TabMenu = new Intent(getApplicationContext(), TabmenuActivity.class);
+			startActivity(TabMenu);
+			finish();
 		}
 
 	}

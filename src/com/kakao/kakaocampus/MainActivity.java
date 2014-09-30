@@ -107,7 +107,6 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
             	Intent intent = new Intent(getApplicationContext(), AllDataActivity.class);	
-            	//Intent intent = new Intent(getApplicationContext(), ActionTab.class);	
             	startActivity(intent);
             }
         });
@@ -163,31 +162,17 @@ public class MainActivity extends Activity {
 	         public void onClick(DialogInterface arg0, int arg1) {
 	        	 Intent putDataToRemoteActivity1 = new Intent(getApplicationContext(), PutDataToRemoteActivity.class);
 	        	 putDataToRemoteActivity1.putExtra("username", userProfileNickName);
-	        	 //putDataToRemoteActivity1.putExtra("username", userProfile.getNickname());
-	        	 //putDataToRemoteActivity1.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-	        	 // For flag
 	        	 startActivity(putDataToRemoteActivity1);
-	        	 /*
-	            Intent positveActivity = new Intent(getApplicationContext(),com.example.alertdialog.PositiveActivity.class);
-	            startActivity(positveActivity);
-	            */
-
-	        	 /*
-	        	 final NoteKakaoStoryPostParamBuilder postParamBuilder = new NoteKakaoStoryPostParamBuilder(noteContent);
-	        	 requestPost(StoryType.NOTE, postParamBuilder);
-	        	 */
+	        	 finish();
 	         }
 	      });
+
 	      alertDialogBuilder.setNegativeButton(R.string.negativeShare, 
 	      new DialogInterface.OnClickListener() {
 				
 	         @Override
 	         public void onClick(DialogInterface dialog, int which) {
-	        	 /*
-	            Intent negativeActivity = new Intent(getApplicationContext(),com.example.alertdialog.NegativeActivity.class);
-	            startActivity(negativeActivity);
-	            */
-	        	 //Toast.makeText(getApplicationContext(), "아니요를 클릭하셨습니다.", Toast.LENGTH_SHORT).show();
+	        	 Toast.makeText(getApplicationContext(), "아니요를 클릭하셨습니다.", Toast.LENGTH_SHORT).show();
 			 }
 	      });
 		    
@@ -234,28 +219,6 @@ public class MainActivity extends Activity {
                     // myStories는 배열이다. 배열에 있는 데이터를 가져와서 원격 데이터베이스에 저장하자.
             }
         }, parameters);
-    }
-
-    private void requestPost(final StoryType storyType, final BasicKakaoStoryPostParamBuilder postParamBuilder) {
-        // 앱이 설치되어 있는 경우 kakao<app_key>://kakaostory?place=1111 로 이동.
-        // 앱이 설치되어 있지 않은 경우 market://details?id=com.kakao.sample.kakaostory&referrer=kakaostory로 이동
-        postParamBuilder.setAndroidExecuteParam(execParam).setIOSExecuteParam(execParam).setAndroidMarketParam(marketParam).setIOSMarketParam(marketParam);
-        try {
-            final Bundle parameters = postParamBuilder.build();
-            KakaoStoryService.requestPost(storyType, new MyKakaoStoryHttpResponseHandler<MyStoryInfo>() {
-                @Override
-                protected void onHttpSuccess(final MyStoryInfo myStoryInfo) {
-                    if(myStoryInfo.getId() != null) {
-                        lastMyStoryId = myStoryInfo.getId();
-                        Toast.makeText(getApplicationContext(), "succeeded to post " + storyType + " on KakaoStory.\nmyStoryId=" + lastMyStoryId, Toast.LENGTH_SHORT).show();
-                    } else{
-                        Toast.makeText(getApplicationContext(), "failed to post " + storyType + " on KakaoStory.\nmyStoryId=null", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }, parameters);
-        } catch (KakaoParameterException e) {
-            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
     }
 
     private abstract class MyKakaoStoryHttpResponseHandler<T> extends KakaoStoryHttpResponseHandler<T> {

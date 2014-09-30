@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">KakaoStorySample</string>
+    <string name="app_name">KakaoCampus</string>
     <string name="user_check_button">is story user</string>
     <string name="profile_button">profile</string>
     <string name="note_post_button">post note</string>
