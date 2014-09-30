@@ -21,5 +21,6 @@
     <string name="title_activity_all_data">AllDataActivity</string>
     <string name="title_activity_new_ka_cam_profile">NewKaCamProfileActivity</string>
     <string name="title_activity_put_data_to_remote">PutDataToRemoteActivity</string>
+    <string name="jsonAnswer">answer</string>
 
 </resources>

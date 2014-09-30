@@ -405,7 +405,7 @@ public final class R {
 		public static final int icon = 0x7f05003c;
 		public static final int ifRoom = 0x7f05000a;
 		public static final int image = 0x7f050039;
-		public static final int kakao_login_activity_progress_bar = 0x7f050059;
+		public static final int kakao_login_activity_progress_bar = 0x7f05005b;
 		public static final int listMode = 0x7f050001;
 		public static final int list_item = 0x7f05003b;
 		public static final int match_parent = 0x7f050024;

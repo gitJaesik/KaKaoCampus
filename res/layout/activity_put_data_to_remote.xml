@@ -9,8 +9,18 @@
     tools:context="com.kakao.kakaocampus.PutDataToRemoteActivity" >
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/putDataString" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="51dp"
+        android:text="@string/jsonAnswer" />
 
 </RelativeLayout>

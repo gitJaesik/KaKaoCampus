@@ -17,24 +17,23 @@ public class ActionTab extends Activity {
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		// action bar를 3개 만든다.
-		for (int i=0;i<3;i++) {
-			ActionBar.Tab tab = ab.newTab();
-			
-			// 밑에 내용이 들어가는 부분입니다.
-			String Cap = "Tab" + (i + 1);
-			
-			// tab에 Tab1~3 을 입력.
-			tab.setText(Cap);
+		ActionBar.Tab tab = ab.newTab();
 
-			// 탭 Fragment를 생성.
-			TabFragment frag = TabFragment.newInstance(Cap);
-			
-			// 탭 프레그먼트를 탭 리스너에 생성 
-			tab.setTabListener(new TabListener(frag));
-			
-			// 탭을 action bar에 추가 
-			ab.addTab(tab);
-		}
+		// 밑에 내용이 들어가는 부분입니다.
+		String Cap = "Tabtest"; 
+		String Aap = "12341234"; 
+
+		// tab에 Tab1~3 을 입력.
+		tab.setText(Cap);
+
+		// 탭 Fragment를 생성.
+		TabFragment frag = TabFragment.newInstance(Aap);
+
+		// 탭 프레그먼트를 탭 리스너에 생성 
+		tab.setTabListener(new TabListener(frag));
+
+		// 탭을 action bar에 추가 
+		ab.addTab(tab);
 
 		if (savedInstanceState != null) {
 			int seltab = savedInstanceState.getInt("seltab");
@@ -97,6 +96,11 @@ public class ActionTab extends Activity {
 			View linear = inflater.inflate(R.layout.actiontabfragment, container, false);
 			TextView textview = (TextView)linear.findViewById(R.id.content);
 			textview.setText(text);
+			
+			/*
+			Button btn = (Button)linear.findViewById(R.id.btn_ok);
+			btn.setOnClickListener(new );
+			*/
 
 			return linear;
 		}

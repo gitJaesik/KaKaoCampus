@@ -390,10 +390,10 @@ public final class R {
 		public static final int checkbox = 0x7f05003f;
 		public static final int classic = 0x7f050029;
 		public static final int collapseActionView = 0x7f05000d;
-		public static final int com_kakao_login = 0x7f05005a;
-		public static final int com_kakao_profile_image = 0x7f05005b;
-		public static final int com_kakao_profile_nickname = 0x7f05005d;
-		public static final int com_kakao_profile_userId = 0x7f05005e;
+		public static final int com_kakao_login = 0x7f05005c;
+		public static final int com_kakao_profile_image = 0x7f05005d;
+		public static final int com_kakao_profile_nickname = 0x7f05005f;
+		public static final int com_kakao_profile_userId = 0x7f050060;
 		public static final int default_activity_button = 0x7f05003a;
 		public static final int dialog = 0x7f05000e;
 		public static final int disableHome = 0x7f050008;
@@ -411,7 +411,7 @@ public final class R {
 		public static final int icon = 0x7f05003c;
 		public static final int ifRoom = 0x7f05000a;
 		public static final int image = 0x7f050039;
-		public static final int kakao_login_activity_progress_bar = 0x7f050059;
+		public static final int kakao_login_activity_progress_bar = 0x7f05005b;
 		public static final int listMode = 0x7f050001;
 		public static final int list_item = 0x7f05003b;
 		public static final int match_parent = 0x7f050024;
@@ -421,7 +421,7 @@ public final class R {
 		public static final int none = 0x7f050010;
 		public static final int normal = 0x7f050000;
 		public static final int production = 0x7f05001f;
-		public static final int profile_edit = 0x7f05005c;
+		public static final int profile_edit = 0x7f05005e;
 		public static final int progress_circular = 0x7f050018;
 		public static final int progress_horizontal = 0x7f050019;
 		public static final int radio = 0x7f050041;

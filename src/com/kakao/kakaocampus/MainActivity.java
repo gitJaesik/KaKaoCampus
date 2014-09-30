@@ -26,7 +26,6 @@ import com.kakao.KakaoStoryService.StoryType;
 import com.kakao.LogoutResponseCallback;
 import com.kakao.MeResponseCallback;
 import com.kakao.MyStoryInfo;
-import com.kakao.NoteKakaoStoryPostParamBuilder;
 import com.kakao.UserManagement;
 import com.kakao.UserProfile;
 import com.kakao.helper.Logger;
@@ -49,6 +48,7 @@ public class MainActivity extends Activity {
     private String null_test;
     private int alertCheck;
     private ProgressDialog pDialog;
+    private String userProfileNickName;
 
 
 	@Override
@@ -71,7 +71,6 @@ public class MainActivity extends Activity {
 
         // 포스팅 동의 파트
         openAlert();
-        //openAlert2();
         //checkAlertAgree();
 	}
 
@@ -107,7 +106,8 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-            	Intent intent = new Intent(getApplicationContext(), ActionTab.class);	
+            	Intent intent = new Intent(getApplicationContext(), AllDataActivity.class);	
+            	//Intent intent = new Intent(getApplicationContext(), ActionTab.class);	
             	startActivity(intent);
             }
         });
@@ -121,6 +121,7 @@ public class MainActivity extends Activity {
 	        protected void onSuccess(final UserProfile userProfile) {
 	            // 성공.
 	        	Map<String, String> kacamProperties = userProfile.getProperties();
+	        	userProfileNickName = userProfile.getNickname();
 
 	        	if(kacamProperties.get("university") != null && kacamProperties.get("phone") != null && kacamProperties.get("email") != null && kacamProperties.get("student_id") != null){
 	        		Log.i("MainActivity", "사용자관리에 대학정보 입력 되어있음을 확인");
@@ -152,28 +153,6 @@ public class MainActivity extends Activity {
 	    });
 	}
 
-	public void openAlert2(){
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(R.string.alert_content) .setTitle(R.string.checkWannaShareText);
-
-		builder.setPositiveButton(R.string.positiveShare, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				// User clicked OK button
-	        	 Intent putDataToRemoteActivity1 = new Intent(getApplicationContext(), PutDataToRemoteActivity.class);
-	        	 startActivity(putDataToRemoteActivity1);
-			}
-		});
-		builder.setNegativeButton(R.string.negativeShare, new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				// User cancelled the dialog
-				Log.i("new alert", "select No");
-			}
-		});
-		
-		AlertDialog dialog = builder.create();
-		dialog.show();
-	}
-
 	public void openAlert(){
 	      AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 	      alertDialogBuilder.setMessage(R.string.checkWannaShareText);
@@ -183,6 +162,8 @@ public class MainActivity extends Activity {
 	         @Override
 	         public void onClick(DialogInterface arg0, int arg1) {
 	        	 Intent putDataToRemoteActivity1 = new Intent(getApplicationContext(), PutDataToRemoteActivity.class);
+	        	 putDataToRemoteActivity1.putExtra("username", userProfileNickName);
+	        	 //putDataToRemoteActivity1.putExtra("username", userProfile.getNickname());
 	        	 //putDataToRemoteActivity1.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 	        	 // For flag
 	        	 startActivity(putDataToRemoteActivity1);
@@ -190,11 +171,6 @@ public class MainActivity extends Activity {
 	            Intent positveActivity = new Intent(getApplicationContext(),com.example.alertdialog.PositiveActivity.class);
 	            startActivity(positveActivity);
 	            */
-	        	 Toast.makeText(getApplicationContext(), "예를 클릭하였습니다.", Toast.LENGTH_SHORT).show();
-
-	        	 //alertCheck = 1;
-	        	 //Log.i("MainActivity", alertCheck + " ");
-
 
 	        	 /*
 	        	 final NoteKakaoStoryPostParamBuilder postParamBuilder = new NoteKakaoStoryPostParamBuilder(noteContent);
@@ -219,16 +195,6 @@ public class MainActivity extends Activity {
 	      alertDialog.show();
    }
 	
-	/*
-	public void checkAlertAgree(){
-		Log.i("MainActivity", "드루오기 전");
-		if(alertCheck == 1){
-	        Log.i("MainActivity", "드루와드루와");
-			Intent putDataToRemoteActivity = new Intent(getApplicationContext(), PutDataToRemoteActivity.class);
-			startActivity(putDataToRemoteActivity);
-		}
-	}
-	*/
 
 	   @Override
    public boolean onCreateOptionsMenu(Menu menu) {
