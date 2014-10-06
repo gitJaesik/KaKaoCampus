@@ -1494,15 +1494,16 @@ containing a value of this type.
         public static final int kakaostory_sample_login_background=0x7f02008b;
         public static final int kakaotalk_icon=0x7f02008c;
         public static final int know=0x7f02008d;
-        public static final int play=0x7f02008e;
-        public static final int post_image=0x7f02008f;
-        public static final int powered_by_google_dark=0x7f020090;
-        public static final int powered_by_google_light=0x7f020091;
-        public static final int sad=0x7f020092;
-        public static final int school=0x7f020093;
-        public static final int template_icon=0x7f020094;
-        public static final int travel=0x7f020095;
-        public static final int univ=0x7f020096;
+        public static final int menu_logout=0x7f02008e;
+        public static final int play=0x7f02008f;
+        public static final int post_image=0x7f020090;
+        public static final int powered_by_google_dark=0x7f020091;
+        public static final int powered_by_google_light=0x7f020092;
+        public static final int sad=0x7f020093;
+        public static final int school=0x7f020094;
+        public static final int template_icon=0x7f020095;
+        public static final int travel=0x7f020096;
+        public static final int univ=0x7f020097;
     }
     public static final class id {
         public static final int action_bar=0x7f05002e;

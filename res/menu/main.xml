@@ -5,9 +5,17 @@
 
     <item
         android:id="@+id/action_settings"
+        android:icon="@drawable/menu_logout"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        />
+        android:showAsAction="always"
+        android:title="@string/action_settings"/>
+    
+<!-- android:onClick="logoutmenu" -->
+    
 <!--         app:showAsAction="never" -->
+<!-- android:actionProviderClass=
+		"andexam.ver4_1.c21_actionbar.ActionProviderTest$CounterProvider"
+        android:onClick="onClickLogout"
+ -->
     
 </menu>

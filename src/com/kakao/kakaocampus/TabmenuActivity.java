@@ -9,10 +9,16 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.kakao.APIErrorResult;
+import com.kakao.LogoutResponseCallback;
+import com.kakao.UserManagement;
 
 public class TabmenuActivity extends Activity {
 
@@ -55,6 +61,44 @@ public class TabmenuActivity extends Activity {
 			ab.setSelectedNavigationItem(seltab);
 		}
 
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	
+	public boolean onOptionsItemSelected(MenuItem item){
+		switch( item.getItemId()) {
+		case R.id.action_settings:
+			onClickLogout();	
+		}
+		return true;
+	}
+	
+	private void onClickLogout() {
+        UserManagement.requestLogout(new LogoutResponseCallback() {
+            @Override
+            protected void onSuccess(final long userId) {
+                redirectLoginActivity();
+            }
+
+            @Override
+            protected void onFailure(final APIErrorResult apiErrorResult) {
+                redirectLoginActivity();
+            }
+        });
+    }
+
+
+
+	private void redirectLoginActivity() {
+		final Intent intent = new Intent(this, KakaoStoryLoginActivity.class);
+		startActivity(intent);
+		finish();
 	}
 
 	public void onSaveInstanceState(Bundle outState) {

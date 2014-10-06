@@ -364,9 +364,9 @@ public final class R {
 		public static final int kakaoaccount_icon = 0x7f020087;
 		public static final int kakaostory_icon = 0x7f020089;
 		public static final int kakaotalk_icon = 0x7f02008c;
-		public static final int powered_by_google_dark = 0x7f020090;
-		public static final int powered_by_google_light = 0x7f020091;
-		public static final int template_icon = 0x7f020094;
+		public static final int powered_by_google_dark = 0x7f020091;
+		public static final int powered_by_google_light = 0x7f020092;
+		public static final int template_icon = 0x7f020095;
 	}
 	public static final class id {
 		public static final int action_bar = 0x7f05002e;

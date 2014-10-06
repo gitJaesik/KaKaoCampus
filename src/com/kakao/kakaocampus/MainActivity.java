@@ -11,18 +11,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.kakao.APIErrorResult;
-import com.kakao.BasicKakaoStoryPostParamBuilder;
-import com.kakao.KakaoParameterException;
 import com.kakao.KakaoStoryHttpResponseHandler;
 import com.kakao.KakaoStoryMyStoriesParamBuilder;
 import com.kakao.KakaoStoryService;
-import com.kakao.KakaoStoryService.StoryType;
 import com.kakao.LogoutResponseCallback;
 import com.kakao.MeResponseCallback;
 import com.kakao.MyStoryInfo;
@@ -62,7 +60,23 @@ public class MainActivity extends Activity {
 
 		initView();
 
+		/*
+		if (savedInstanceState == null) {
+			x = 50;
+		} else {
+			x = savedInstanceState.getInt("x");
+		}
+		y = 50;
+		*/
 	}
+	
+
+
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		//outState.putInt("x", x);
+	}
+	
 
 	// init view code ( button and alertDialog ) 
 	public void initView(){
@@ -188,6 +202,15 @@ public class MainActivity extends Activity {
 	      return true;
    }
 
+		
+	public boolean onOptionsItemSelected(MenuItem item){
+		switch( item.getItemId()) {
+		case R.id.action_settings:
+			onClickLogout();	
+		}
+		return true;
+	}
+	
 	private void onClickLogout() {
         UserManagement.requestLogout(new LogoutResponseCallback() {
             @Override
