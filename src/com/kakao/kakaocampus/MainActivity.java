@@ -186,8 +186,10 @@ public class MainActivity extends Activity {
 				
 	         @Override
 	         public void onClick(DialogInterface dialog, int which) {
-	        	 Toast.makeText(getApplicationContext(), "아니요를 클릭하셨습니다.", Toast.LENGTH_SHORT).show();
-			 }
+	        	 //Toast.makeText(getApplicationContext(), "아니요를 클릭하셨습니다.", Toast.LENGTH_SHORT).show();
+	        	 Intent tab = new Intent(getApplicationContext(), TabmenuActivity.class);
+	        	 startActivity(tab);
+	        	 finish();}
 	      });
 		    
 	      AlertDialog alertDialog = alertDialogBuilder.create();
