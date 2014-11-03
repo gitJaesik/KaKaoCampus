@@ -159,12 +159,6 @@ public class PutDataToRemoteActivity extends ActionBarActivity {
 						 */
 						// myStories는 배열이다. 배열에 있는 데이터를 가져와서 원격 데이터베이스에 저장하자.
 
-						// All
-						/*
-						 * for(MyStoryInfo myStoryTem : myStories){
-						 * //myStoryTem.getContent(); Log.i("MainActivity",
-						 * "Contents   ==>   " + myStoryTem.getContent()); }
-						 */
 						/*
 						 * { "1" : { "username" : "jaesikTest", "usercontents" :
 						 * "test}, "
@@ -272,6 +266,8 @@ public class PutDataToRemoteActivity extends ActionBarActivity {
 									} catch (JSONException e) {
 										e.printStackTrace();
 									}
+									
+									boardKind = null;
 
 									/*
 									 * jsonMyStoriesInfo = jsonMyStoriesInfo +
