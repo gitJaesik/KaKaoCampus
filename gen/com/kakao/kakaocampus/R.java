@@ -1312,12 +1312,18 @@ containing a value of this type.
          (such as screen margins) for screens with more than 820dp of available width. This
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
+ Default screen margins, per the Android Design guidelines. 
+
+         Example customization of dimensions originally defined in res/values/dimens.xml
+         (such as screen margins) for screens with more than 820dp of available width. This
+         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
+    
          */
-        public static final int activity_horizontal_margin=0x7f080018;
-        public static final int activity_vertical_margin=0x7f080019;
-        public static final int com_kakao_padding=0x7f080017;
-        public static final int com_kakao_profile_property_margin=0x7f080015;
-        public static final int com_kakao_profile_property_text=0x7f080016;
+        public static final int activity_horizontal_margin=0x7f080015;
+        public static final int activity_vertical_margin=0x7f080016;
+        public static final int com_kakao_padding=0x7f080019;
+        public static final int com_kakao_profile_property_margin=0x7f080017;
+        public static final int com_kakao_profile_property_text=0x7f080018;
         /**  The platform's desired fixed height for a dialog along the major axis
          (the screen is in portrait). This may be either a fraction or a dimension.
  The platform's desired fixed height for a dialog along the major axis
@@ -1517,12 +1523,12 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050036;
-        public static final int action_settings=0x7f05007c;
+        public static final int action_settings=0x7f05007e;
         public static final int activity_chooser_view_content=0x7f050037;
         public static final int always=0x7f05000b;
-        public static final int background=0x7f050079;
+        public static final int background=0x7f05007b;
         public static final int beginning=0x7f050011;
-        public static final int birthday=0x7f05007b;
+        public static final int birthday=0x7f05007d;
         public static final int book_now=0x7f050028;
         public static final int buyButton=0x7f050022;
         public static final int buy_now=0x7f050027;
@@ -1534,7 +1540,7 @@ containing a value of this type.
         public static final int com_kakao_profile_image=0x7f05006d;
         public static final int com_kakao_profile_nickname=0x7f05006f;
         public static final int com_kakao_profile_userId=0x7f050070;
-        public static final int com_kakao_user_profile=0x7f05007a;
+        public static final int com_kakao_user_profile=0x7f05007c;
         public static final int content=0x7f05004f;
         public static final int default_activity_button=0x7f05003a;
         public static final int dialog=0x7f05000e;
@@ -1549,7 +1555,7 @@ containing a value of this type.
         public static final int expand_activities_button=0x7f050038;
         public static final int expanded_menu=0x7f05003e;
         public static final int gallery1=0x7f05005a;
-        public static final int get_post_button=0x7f050078;
+        public static final int get_post_button=0x7f05007a;
         public static final int get_posts_button=0x7f050055;
         public static final int gotoallboard=0x7f050056;
         public static final int grayscale=0x7f05002a;
@@ -1561,13 +1567,13 @@ containing a value of this type.
         public static final int icon=0x7f05003c;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050039;
-        public static final int image_post_button=0x7f050076;
+        public static final int image_post_button=0x7f050078;
         public static final int inputEmail=0x7f05005f;
         public static final int inputPhone=0x7f05005e;
         public static final int inputStudent_Id=0x7f050060;
         public static final int inputUniversity=0x7f05005d;
         public static final int kakao_login_activity_progress_bar=0x7f05006b;
-        public static final int link_post_button=0x7f050077;
+        public static final int link_post_button=0x7f050079;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f05003b;
         public static final int logout_button=0x7f050054;
@@ -1579,7 +1585,7 @@ containing a value of this type.
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
         public static final int production=0x7f05001f;
-        public static final int profile_button=0x7f050074;
+        public static final int profile_button=0x7f050076;
         public static final int profile_edit=0x7f05006e;
         public static final int progress_circular=0x7f050018;
         public static final int progress_horizontal=0x7f050019;
@@ -1613,9 +1619,11 @@ containing a value of this type.
         public static final int terrain=0x7f05001b;
         public static final int testView=0x7f050058;
         public static final int textView1=0x7f050059;
+        public static final int textView100=0x7f050073;
         public static final int textView2=0x7f05005b;
+        public static final int textView200=0x7f050074;
         public static final int textView3=0x7f05005c;
-        public static final int text_post_button=0x7f050075;
+        public static final int text_post_button=0x7f050077;
         public static final int title=0x7f05003d;
         public static final int top_action_bar=0x7f050032;
         public static final int university_department=0x7f050067;
@@ -1626,7 +1634,7 @@ containing a value of this type.
         public static final int up=0x7f050033;
         public static final int updateKaCamProfile=0x7f050061;
         public static final int useLogo=0x7f050003;
-        public static final int user_check_button=0x7f050073;
+        public static final int user_check_button=0x7f050075;
         public static final int usercontents=0x7f050072;
         public static final int username=0x7f050071;
         public static final int withText=0x7f05000c;
@@ -1713,14 +1721,16 @@ containing a value of this type.
         public static final int kakao_login_layout=0x7f030033;
         public static final int kakao_profile_layout=0x7f030034;
         public static final int list_item=0x7f030035;
-        public static final int main=0x7f030036;
-        public static final int support_simple_spinner_dropdown_item=0x7f030037;
+        public static final int listview1_item=0x7f030036;
+        public static final int main=0x7f030037;
+        public static final int support_simple_spinner_dropdown_item=0x7f030038;
     }
     public static final class menu {
         public static final int all_data=0x7f0d0000;
         public static final int main=0x7f0d0001;
-        public static final int new_ka_cam_profile=0x7f0d0002;
-        public static final int put_data_to_remote=0x7f0d0003;
+        public static final int map_pane=0x7f0d0002;
+        public static final int new_ka_cam_profile=0x7f0d0003;
+        public static final int put_data_to_remote=0x7f0d0004;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1763,32 +1773,32 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
-        public static final int action_settings=0x7f0a0045;
-        public static final int alert_content=0x7f0a004a;
-        public static final int app_name=0x7f0a0038;
-        public static final int birthday_label=0x7f0a0042;
-        public static final int checkWannaShareText=0x7f0a0046;
-        public static final int com_kakao_account_cancel=0x7f0a0034;
+        public static final int action_settings=0x7f0a0028;
+        public static final int alert_content=0x7f0a004b;
+        public static final int app_name=0x7f0a003b;
+        public static final int birthday_label=0x7f0a0045;
+        public static final int checkWannaShareText=0x7f0a0047;
+        public static final int com_kakao_account_cancel=0x7f0a0037;
         /**  for kakaolink 
  for kakaolink 
          */
-        public static final int com_kakao_alert_appKey=0x7f0a0035;
-        public static final int com_kakao_alert_install_kakaotalk=0x7f0a0036;
-        public static final int com_kakao_cancel_button=0x7f0a002c;
-        public static final int com_kakao_confirm_logout=0x7f0a002a;
-        public static final int com_kakao_confirm_unlink=0x7f0a002e;
-        public static final int com_kakao_kakaostory_account=0x7f0a0032;
-        public static final int com_kakao_kakaotalk_account=0x7f0a0031;
+        public static final int com_kakao_alert_appKey=0x7f0a0038;
+        public static final int com_kakao_alert_install_kakaotalk=0x7f0a0039;
+        public static final int com_kakao_cancel_button=0x7f0a002f;
+        public static final int com_kakao_confirm_logout=0x7f0a002d;
+        public static final int com_kakao_confirm_unlink=0x7f0a0031;
+        public static final int com_kakao_kakaostory_account=0x7f0a0035;
+        public static final int com_kakao_kakaotalk_account=0x7f0a0034;
         /**  for usermgmt 
  for usermgmt 
          */
-        public static final int com_kakao_login_button=0x7f0a0028;
-        public static final int com_kakao_logout_button=0x7f0a0029;
-        public static final int com_kakao_ok_button=0x7f0a002b;
-        public static final int com_kakao_other_kakaoaccount=0x7f0a0033;
-        public static final int com_kakao_profile_nickname=0x7f0a002f;
-        public static final int com_kakao_profile_userId=0x7f0a0030;
-        public static final int com_kakao_unlink_button=0x7f0a002d;
+        public static final int com_kakao_login_button=0x7f0a002b;
+        public static final int com_kakao_logout_button=0x7f0a002c;
+        public static final int com_kakao_ok_button=0x7f0a002e;
+        public static final int com_kakao_other_kakaoaccount=0x7f0a0036;
+        public static final int com_kakao_profile_nickname=0x7f0a0032;
+        public static final int com_kakao_profile_userId=0x7f0a0033;
+        public static final int com_kakao_unlink_button=0x7f0a0030;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -1878,30 +1888,32 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f0a0025;
-        public static final int core_com_kakao_sdk_loading=0x7f0a0027;
-        public static final int get_post_button=0x7f0a0040;
-        public static final int get_posts_button=0x7f0a0041;
-        public static final int hello_world=0x7f0a0044;
-        public static final int jsonAnswer=0x7f0a004e;
-        public static final int kakao_app_key=0x7f0a0037;
-        public static final int kakao_scheme=0x7f0a0039;
-        public static final int kakaostory_host=0x7f0a003a;
-        public static final int link_post_button=0x7f0a003f;
-        public static final int negativeShare=0x7f0a0048;
-        public static final int note_post_button=0x7f0a003d;
-        public static final int photo_post_button=0x7f0a003e;
-        public static final int positiveShare=0x7f0a0047;
-        public static final int profile_button=0x7f0a003c;
-        public static final int putDataString=0x7f0a0049;
-        public static final int title_activity_all_data=0x7f0a004b;
-        public static final int title_activity_main=0x7f0a0043;
-        public static final int title_activity_new_ka_cam_profile=0x7f0a004c;
-        public static final int title_activity_put_data_to_remote=0x7f0a004d;
-        public static final int user_check_button=0x7f0a003b;
+        public static final int core_com_kakao_sdk_loading=0x7f0a002a;
+        public static final int get_post_button=0x7f0a0043;
+        public static final int get_posts_button=0x7f0a0044;
+        public static final int hello_world=0x7f0a0027;
+        public static final int jsonAnswer=0x7f0a0050;
+        public static final int kakao_app_key=0x7f0a003a;
+        public static final int kakao_scheme=0x7f0a003c;
+        public static final int kakaostory_host=0x7f0a003d;
+        public static final int link_post_button=0x7f0a0042;
+        public static final int negativeShare=0x7f0a0049;
+        public static final int note_post_button=0x7f0a0040;
+        public static final int photo_post_button=0x7f0a0041;
+        public static final int positiveShare=0x7f0a0048;
+        public static final int profile_button=0x7f0a003f;
+        public static final int putDataString=0x7f0a004a;
+        public static final int title_activity_all_data=0x7f0a004c;
+        public static final int title_activity_main=0x7f0a0046;
+        public static final int title_activity_map_pane=0x7f0a0026;
+        public static final int title_activity_new_ka_cam_profile=0x7f0a004d;
+        public static final int title_activity_put_data_to_remote=0x7f0a004e;
+        public static final int title_activity_spring_time_beat=0x7f0a004f;
+        public static final int user_check_button=0x7f0a003e;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 
          */
-        public static final int wallet_buy_button_place_holder=0x7f0a0026;
+        public static final int wallet_buy_button_place_holder=0x7f0a0029;
     }
     public static final class style {
         /**  Mimic text appearance in select_dialog_item.xml 

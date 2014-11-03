@@ -227,9 +227,11 @@ public final class R {
 		public static final int abc_panel_menu_list_width = 0x7f08000b;
 		public static final int abc_search_view_preferred_width = 0x7f08000d;
 		public static final int abc_search_view_text_min_width = 0x7f08000c;
-		public static final int com_kakao_padding = 0x7f080017;
-		public static final int com_kakao_profile_property_margin = 0x7f080015;
-		public static final int com_kakao_profile_property_text = 0x7f080016;
+		public static final int activity_horizontal_margin = 0x7f080015;
+		public static final int activity_vertical_margin = 0x7f080016;
+		public static final int com_kakao_padding = 0x7f080019;
+		public static final int com_kakao_profile_property_margin = 0x7f080017;
+		public static final int com_kakao_profile_property_text = 0x7f080018;
 		public static final int dialog_fixed_height_major = 0x7f080013;
 		public static final int dialog_fixed_height_minor = 0x7f080014;
 		public static final int dialog_fixed_width_major = 0x7f080011;
@@ -380,6 +382,7 @@ public final class R {
 		public static final int action_menu_divider = 0x7f050016;
 		public static final int action_menu_presenter = 0x7f050017;
 		public static final int action_mode_close_button = 0x7f050036;
+		public static final int action_settings = 0x7f05007e;
 		public static final int activity_chooser_view_content = 0x7f050037;
 		public static final int always = 0x7f05000b;
 		public static final int beginning = 0x7f050011;
@@ -487,7 +490,10 @@ public final class R {
 		public static final int kakao_login = 0x7f030032;
 		public static final int kakao_login_layout = 0x7f030033;
 		public static final int kakao_profile_layout = 0x7f030034;
-		public static final int support_simple_spinner_dropdown_item = 0x7f030037;
+		public static final int support_simple_spinner_dropdown_item = 0x7f030038;
+	}
+	public static final class menu {
+		public static final int map_pane = 0x7f0d0002;
 	}
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f0a0001;
@@ -503,22 +509,23 @@ public final class R {
 		public static final int abc_searchview_description_voice = 0x7f0a0008;
 		public static final int abc_shareactionprovider_share_with = 0x7f0a000c;
 		public static final int abc_shareactionprovider_share_with_application = 0x7f0a000b;
-		public static final int app_name = 0x7f0a0038;
-		public static final int com_kakao_account_cancel = 0x7f0a0034;
-		public static final int com_kakao_alert_appKey = 0x7f0a0035;
-		public static final int com_kakao_alert_install_kakaotalk = 0x7f0a0036;
-		public static final int com_kakao_cancel_button = 0x7f0a002c;
-		public static final int com_kakao_confirm_logout = 0x7f0a002a;
-		public static final int com_kakao_confirm_unlink = 0x7f0a002e;
-		public static final int com_kakao_kakaostory_account = 0x7f0a0032;
-		public static final int com_kakao_kakaotalk_account = 0x7f0a0031;
-		public static final int com_kakao_login_button = 0x7f0a0028;
-		public static final int com_kakao_logout_button = 0x7f0a0029;
-		public static final int com_kakao_ok_button = 0x7f0a002b;
-		public static final int com_kakao_other_kakaoaccount = 0x7f0a0033;
-		public static final int com_kakao_profile_nickname = 0x7f0a002f;
-		public static final int com_kakao_profile_userId = 0x7f0a0030;
-		public static final int com_kakao_unlink_button = 0x7f0a002d;
+		public static final int action_settings = 0x7f0a0028;
+		public static final int app_name = 0x7f0a003b;
+		public static final int com_kakao_account_cancel = 0x7f0a0037;
+		public static final int com_kakao_alert_appKey = 0x7f0a0038;
+		public static final int com_kakao_alert_install_kakaotalk = 0x7f0a0039;
+		public static final int com_kakao_cancel_button = 0x7f0a002f;
+		public static final int com_kakao_confirm_logout = 0x7f0a002d;
+		public static final int com_kakao_confirm_unlink = 0x7f0a0031;
+		public static final int com_kakao_kakaostory_account = 0x7f0a0035;
+		public static final int com_kakao_kakaotalk_account = 0x7f0a0034;
+		public static final int com_kakao_login_button = 0x7f0a002b;
+		public static final int com_kakao_logout_button = 0x7f0a002c;
+		public static final int com_kakao_ok_button = 0x7f0a002e;
+		public static final int com_kakao_other_kakaoaccount = 0x7f0a0036;
+		public static final int com_kakao_profile_nickname = 0x7f0a0032;
+		public static final int com_kakao_profile_userId = 0x7f0a0033;
+		public static final int com_kakao_unlink_button = 0x7f0a0030;
 		public static final int common_google_play_services_enable_button = 0x7f0a0018;
 		public static final int common_google_play_services_enable_text = 0x7f0a0017;
 		public static final int common_google_play_services_enable_title = 0x7f0a0016;
@@ -544,9 +551,11 @@ public final class R {
 		public static final int common_google_play_services_update_title = 0x7f0a0019;
 		public static final int common_signin_button_text = 0x7f0a0024;
 		public static final int common_signin_button_text_long = 0x7f0a0025;
-		public static final int core_com_kakao_sdk_loading = 0x7f0a0027;
-		public static final int kakao_app_key = 0x7f0a0037;
-		public static final int wallet_buy_button_place_holder = 0x7f0a0026;
+		public static final int core_com_kakao_sdk_loading = 0x7f0a002a;
+		public static final int hello_world = 0x7f0a0027;
+		public static final int kakao_app_key = 0x7f0a003a;
+		public static final int title_activity_map_pane = 0x7f0a0026;
+		public static final int wallet_buy_button_place_holder = 0x7f0a0029;
 	}
 	public static final class style {
 		public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog = 0x7f0b0063;

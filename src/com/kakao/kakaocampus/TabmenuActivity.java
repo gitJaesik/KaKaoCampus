@@ -93,8 +93,6 @@ public class TabmenuActivity extends Activity {
         });
     }
 
-
-
 	private void redirectLoginActivity() {
 		final Intent intent = new Intent(this, KakaoStoryLoginActivity.class);
 		startActivity(intent);
@@ -351,6 +349,26 @@ public class TabmenuActivity extends Activity {
 			return frag;
 		}
 
+		public void onActivityCreated(Bundle savedInstanceState) {
+			super.onActivityCreated(savedInstanceState);
+			/*
+			setListAdapter(new ArrayAdapter<String>(getActivity(),
+					android.R.layout.simple_list_item_1, WORDS));
+					*/
+			Button springtime_beat = (Button) getActivity().findViewById(R.id.springtime_beat);
+			springtime_beat.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent springbeatIntent = new Intent(getActivity(), SpringTimeBeatActivity.class);
+					//Intent springbeatIntent = new Intent(getActivity(), AllDataActivity.class);
+					springbeatIntent.putExtra("kind", "spring_beat");
+					startActivity(springbeatIntent);
+					//finish();
+				}
+			});
+		}
+
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
 
@@ -359,6 +377,7 @@ public class TabmenuActivity extends Activity {
 			View linear = inflater.inflate(R.layout.activity_spring_time,
 					container, false);
 			
+			/*
 			Button springtime_beat = (Button) linear
 					.findViewById(R.id.springtime_beat);
 			springtime_beat.setOnClickListener(new OnClickListener() {
@@ -375,6 +394,7 @@ public class TabmenuActivity extends Activity {
 				}
 
 			});
+			*/
 			
 			Button springtime_tipshare = (Button) linear
 					.findViewById(R.id.springtime_tipshare);

@@ -48,12 +48,17 @@ public class AllDataActivity extends ListActivity {
  
     // data JSONArray
     JSONArray data = null;
+    
+    String kind;
  
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_data);	//all_data -> activity_all_data로 변경 
         //setContentView(R.layout.activity_all_data);
+
+		Intent intent = getIntent();
+		kind = intent.getStringExtra("kind");
  
         // Hashmap for ListView
         dataList = new ArrayList<HashMap<String, String>>();
@@ -208,6 +213,8 @@ public class AllDataActivity extends ListActivity {
                             new int[] { R.id.username, R.id.usercontents });
                     // updating listview
                     setListAdapter(adapter);
+
+                	Toast.makeText(getApplicationContext(), "kind is : " + kind, Toast.LENGTH_LONG).show();
                 }
             });
  
