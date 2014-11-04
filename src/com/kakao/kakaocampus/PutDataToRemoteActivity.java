@@ -255,6 +255,8 @@ public class PutDataToRemoteActivity extends ActionBarActivity {
 										joIn.put("usercontents",
 												myStoryTem.getContent());
 										joIn.put("kind", boardKind);
+										
+										joIn.put("kslink", myStoryTem.getUrl());
 
 										if (boardKind == "4") {
 											joIn.put("username", "secret");
