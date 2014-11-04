@@ -257,7 +257,7 @@ public class PutDataToRemoteActivity extends ActionBarActivity {
 										joIn.put("kind", boardKind);
 
 										if (boardKind == "4") {
-											joIn.put("username", null);
+											joIn.put("username", "secret");
 										} else {
 											joIn.put("username", usernameIntent);
 										}

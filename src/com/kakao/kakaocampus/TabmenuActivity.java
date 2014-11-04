@@ -282,6 +282,12 @@ public class TabmenuActivity extends Activity {
 			etc_growing.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 
+					Intent growing = new Intent(getActivity(), GetSelectedDataActivity.class);
+					growing.putExtra("kind", "5");
+					growing.putExtra("titleName", "무럭무럭");
+					startActivity(growing);
+
+					/*
 					FragmentManager fm = getFragmentManager();
 					FragmentTransaction tr = fm.beginTransaction();
 					TabFragment11 etcGrowing = TabFragment11
@@ -290,6 +296,7 @@ public class TabmenuActivity extends Activity {
 					tr.addToBackStack(null);
 					tr.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
 					tr.commit();
+					*/
 				}
 
 			});
@@ -367,9 +374,9 @@ public class TabmenuActivity extends Activity {
 				
 				@Override
 				public void onClick(View v) {
-					Intent springbeatIntent = new Intent(getActivity(), SpringTimeBeatActivity.class);
+					Intent springbeatIntent = new Intent(getActivity(), GetSelectedDataActivity.class);
 					//Intent springbeatIntent = new Intent(getActivity(), AllDataActivity.class);
-					springbeatIntent.putExtra("kind", "spring_beat");
+					springbeatIntent.putExtra("kind", "9");
 					springbeatIntent.putExtra("titleName", "나 두근두근해");
 					startActivity(springbeatIntent);
 					//finish();
