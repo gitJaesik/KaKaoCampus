@@ -13,11 +13,15 @@ import org.json.JSONObject;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -46,6 +50,7 @@ public class GetSelectedDataActivity extends ListActivity {
     private static final String TAG_PRODUCTS = "data";
     private static final String TAG_USERNAME = "username";
     private static final String TAG_USERCONTENTS = "usercontents";
+    private static final String TAG_KSLINK = "kslink";
  
     // data JSONArray
     JSONArray data = null;
@@ -79,12 +84,16 @@ public class GetSelectedDataActivity extends ListActivity {
         // launching Edit Product Screen
         
         //jaesik modify
-        /* 
         lv.setOnItemClickListener(new OnItemClickListener() {
  
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
+            	
+            	String url = dataList.get(position).get("kslink");
+            	Intent webintent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            	startActivity(webintent);
+            	/*
                 // getting values from selected ListItem
                 String username = ((TextView) view.findViewById(R.id.username)).getText()
                         .toString();
@@ -97,9 +106,9 @@ public class GetSelectedDataActivity extends ListActivity {
  
                 // starting new activity and expecting some response back
                 startActivityForResult(in, 100);
+                */
             }
         });
-        */
  
     }
 
@@ -199,14 +208,16 @@ public class GetSelectedDataActivity extends ListActivity {
                         // Storing each json item in variable
                         String id = c.getString(TAG_USERNAME);
                         String usercontents = c.getString(TAG_USERCONTENTS);
- 
+                        String kslink = c.getString(TAG_KSLINK);
+
                         // creating new HashMap
                         HashMap<String, String> map = new HashMap<String, String>();
  
                         // adding each child node to HashMap key => value
                         map.put(TAG_USERNAME, id);
                         map.put(TAG_USERCONTENTS, usercontents);
- 
+                        map.put(TAG_KSLINK, kslink);
+
                         // adding HashList to ArrayList
                         dataList.add(map);
                     }
