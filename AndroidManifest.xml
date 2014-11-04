@@ -65,6 +65,10 @@
             android:name=".SpringTimeBeatActivity"
             android:label="@string/title_activity_spring_time_beat" >
         </activity>
+        <activity
+            android:name=".GetSelectedDataActivity"
+            android:label="@string/title_activity_get_selected_data" >
+        </activity>
     </application>
 
 </manifest>

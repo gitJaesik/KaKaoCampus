@@ -177,7 +177,13 @@ public class TabmenuActivity extends Activity {
 					.findViewById(R.id.university_univ);
 			university_univ.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
+					Intent springbeatIntent = new Intent(getActivity(), GetSelectedDataActivity.class);
+					//Intent springbeatIntent = new Intent(getActivity(), AllDataActivity.class);
+					springbeatIntent.putExtra("kind", "1");
+					springbeatIntent.putExtra("titleName", "학교 공지");
+					startActivity(springbeatIntent);
 
+					/*
 					FragmentManager fm = getFragmentManager();
 					FragmentTransaction tr = fm.beginTransaction();
 					TabFragment6 universityUniv = TabFragment6
@@ -186,6 +192,7 @@ public class TabmenuActivity extends Activity {
 					tr.addToBackStack(null);
 					tr.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
 					tr.commit();
+					*/
 				}
 
 			});
@@ -363,6 +370,7 @@ public class TabmenuActivity extends Activity {
 					Intent springbeatIntent = new Intent(getActivity(), SpringTimeBeatActivity.class);
 					//Intent springbeatIntent = new Intent(getActivity(), AllDataActivity.class);
 					springbeatIntent.putExtra("kind", "spring_beat");
+					springbeatIntent.putExtra("titleName", "나 두근두근해");
 					startActivity(springbeatIntent);
 					//finish();
 				}
