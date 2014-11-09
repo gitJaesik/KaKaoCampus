@@ -42,7 +42,6 @@ public class GetSelectedDataActivity extends ListActivity {
  
     ArrayList<HashMap<String, String>> dataList;
  
-    //private static String url_all_data = "http://kacamdb.bugs3.com/get_all_data.php";
     private static String url_all_data = "http://kacamdb.bugs3.com/get_selected_data.php";
  
     // JSON Node names
@@ -76,37 +75,21 @@ public class GetSelectedDataActivity extends ListActivity {
  
         // Loading data in Background Thread
         new LoadAllData().execute();
+        // 데이터를 받아 오는 것이 끝남
  
-        // Get listview
+        // ListView의 정보를 가져오기
         ListView lv = getListView();
  
-        // on seleting single product
-        // launching Edit Product Screen
-        
-        //jaesik modify
+        // 해당 카카오스토리 글을 클릭 시 Uri Parse를 이용하여 원하는 주소로 이동
         lv.setOnItemClickListener(new OnItemClickListener() {
  
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                    int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             	
+            	// "kslink is stand for kakao story link" 
             	String url = dataList.get(position).get("kslink");
             	Intent webintent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             	startActivity(webintent);
-            	/*
-                // getting values from selected ListItem
-                String username = ((TextView) view.findViewById(R.id.username)).getText()
-                        .toString();
- 
-                // Starting new intent
-                Intent in = new Intent(getApplicationContext(),
-                        EditProductActivity.class);
-                // sending username to next activity
-                in.putExtra(TAG_USERNAME, username);
- 
-                // starting new activity and expecting some response back
-                startActivityForResult(in, 100);
-                */
             }
         });
  
@@ -181,13 +164,11 @@ public class GetSelectedDataActivity extends ListActivity {
         protected String doInBackground(String... args) {
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            // getting JSON string from URL
 
             // POST KIND
 			params.add(new BasicNameValuePair("kind", kind));
 
             JSONObject json = jParser.makeHttpRequest(url_all_data, "POST", params);
-            //JSONObject json = jParser.makeHttpRequest(url_all_data, "GET", params);
  
             // Check your log cat for JSON reponse
             Log.d("All Data: ", json.toString());
@@ -195,10 +176,8 @@ public class GetSelectedDataActivity extends ListActivity {
             try {
                 // Checking for SUCCESS TAG
                 int success = json.getInt(TAG_SUCCESS);
- 
                 if (success == 1) {
-                    // data found
-                    // Getting Array of Data
+                	// Save data to data Array
                     data = json.getJSONArray(TAG_PRODUCTS);
  
                     // looping through All Data
@@ -210,29 +189,16 @@ public class GetSelectedDataActivity extends ListActivity {
                         String usercontents = c.getString(TAG_USERCONTENTS);
                         String kslink = c.getString(TAG_KSLINK);
 
-                        // creating new HashMap
                         HashMap<String, String> map = new HashMap<String, String>();
  
-                        // adding each child node to HashMap key => value
                         map.put(TAG_USERNAME, id);
                         map.put(TAG_USERCONTENTS, usercontents);
                         map.put(TAG_KSLINK, kslink);
 
-                        // adding HashList to ArrayList
                         dataList.add(map);
                     }
                 } else {
-                	
-                	// jaeisk modify
-                	/*
-                    // no data found
-                    // Launch Add New product Activity
-                    Intent i = new Intent(getApplicationContext(),
-                            NewProductActivity.class);
-                    // Closing all previous activities
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(i);
-                    */
+                	// failed get data from remote database
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -248,11 +214,8 @@ public class GetSelectedDataActivity extends ListActivity {
             runOnUiThread(new Runnable() {
                 public void run() {
                 	
-                	//ListView listv = (ListView)findViewById(R.id.list);
-                    //ListAdapter adapter = new SimpleAdapter( GetSelectedDataActivity.this, dataList, R.layout.list_item, new String[] { TAG_USERNAME, TAG_USERCONTENTS}, new int[] { R.id.username, R.id.usercontents });
                     ListAdapter adapter = new SimpleAdapter(GetSelectedDataActivity.this, dataList, R.layout.listview1_item,
                     		new String[] { TAG_USERNAME, TAG_USERCONTENTS}, new int[] { R.id.textView100, R.id.textView200 });
-                    // updating listview
                     setListAdapter(adapter);
 
                 	Toast.makeText(getApplicationContext(), "kind is : " + kind, Toast.LENGTH_LONG).show();

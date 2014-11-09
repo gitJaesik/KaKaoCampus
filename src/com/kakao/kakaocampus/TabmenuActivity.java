@@ -26,7 +26,7 @@ public class TabmenuActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tabmenu);
 
-		// ab가 액션바 (액션바는 Title의 확장이라고 생각하시면 되요)
+		// ab가 액션바 (액션바는 Title의 확장)
 		ActionBar ab = getActionBar();
 		// ab의 모드를 탭으로 바꿈
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -357,6 +357,7 @@ public class TabmenuActivity extends Activity {
 		}
 	}
 
+	// 4번쨰 탭
 	public static class TabFragment4 extends Fragment {
 		public static TabFragment4 newInstance(String text) {
 			TabFragment4 frag = new TabFragment4();
@@ -365,21 +366,17 @@ public class TabmenuActivity extends Activity {
 
 		public void onActivityCreated(Bundle savedInstanceState) {
 			super.onActivityCreated(savedInstanceState);
-			/*
-			setListAdapter(new ArrayAdapter<String>(getActivity(),
-					android.R.layout.simple_list_item_1, WORDS));
-					*/
 			Button springtime_beat = (Button) getActivity().findViewById(R.id.springtime_beat);
 			springtime_beat.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
+					// Intent 실행, GetSelectedDataActivity로 이동
 					Intent springbeatIntent = new Intent(getActivity(), GetSelectedDataActivity.class);
-					//Intent springbeatIntent = new Intent(getActivity(), AllDataActivity.class);
+					// Intent시 타이틀 이름과 데이터베이스에 전송할 카테고리 번호를 전송
 					springbeatIntent.putExtra("kind", "9");
 					springbeatIntent.putExtra("titleName", "나 두근두근해");
 					startActivity(springbeatIntent);
-					//finish();
 				}
 			});
 		}

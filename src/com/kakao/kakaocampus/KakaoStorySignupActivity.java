@@ -40,8 +40,9 @@ public class KakaoStorySignupActivity extends SampleSignupActivity {
      * 사용자가 가입 상태임을 확인한 경우로 Main 페이지로 이동한다.
      */
     protected void redirectMainActivity() {
+    	// 카카오 아이디 로그인 후 MainActicity로 이동
         final Intent intent = new Intent(this, MainActivity.class);
-//        final Intent intent = new Intent(this, KakaoStoryMainActivity.class);
+        //final Intent intent = new Intent(this, KakaoStoryMainActivity.class);
         startActivity(intent);
         finish();
     }

@@ -38,10 +38,8 @@ public class PutDataToRemoteActivity extends ActionBarActivity {
 
 	// JSONParser
 	JSONParser jsonParser = new JSONParser();
-	// url to create new product
-	// private static String url_create_product =
-	// "http://api.androidhive.info/android_connect/create_product.php";
-	private static String url_create_product = "http://kacamdb.bugs3.com/input_data.php";
+
+	private static String url_save_kakaostory_data = "http://kacamdb.bugs3.com/input_data.php";
 
 	// JSON Node names
 	private static final String TAG_SUCCESS = "success";
@@ -59,7 +57,9 @@ public class PutDataToRemoteActivity extends ActionBarActivity {
 
 		Intent intent = getIntent();
 		usernameIntent = intent.getStringExtra("username");
+		// TODO User Profile에 있는 정보 및 사진은 추후 업데이트 예정
 		Log.i("PutDataActivity", "Start!!!!!!!!!!!");
+
 		init();
 	}
 
@@ -73,13 +73,15 @@ public class PutDataToRemoteActivity extends ActionBarActivity {
 	}
 
 	public void init() {
-		final NoteKakaoStoryPostParamBuilder postParamBuilder = new NoteKakaoStoryPostParamBuilder(
-				noteContent);
+		
+		// 카카오스토리에 올릴 메세지를 입력 (noteContent)
+		final NoteKakaoStoryPostParamBuilder postParamBuilder = new NoteKakaoStoryPostParamBuilder(noteContent);
+		
+		// Last MyStoryID를 가져오기 위해 카카오캠퍼스에서 카카오스토리로 글을 하나 올림
 		requestPost(StoryType.NOTE, postParamBuilder);
+		
+		// 카카오스토리에 있는 글을 Remote Database에 올림
 		requestGetMyStories();
-
-		// TODO User Profile에 있는 정보 및 사진은 추후 업데이트 예정
-		// jsonFunction();
 
 	}
 
@@ -120,6 +122,7 @@ public class PutDataToRemoteActivity extends ActionBarActivity {
 						protected void onHttpSuccess(
 								final MyStoryInfo myStoryInfo) {
 							if (myStoryInfo.getId() != null) {
+								// 가장 최근(=현재 카카오스토리에 올린 글) story id를 가져와서 lastMyStoryId에 입력
 								lastMyStoryId = myStoryInfo.getId();
 								Toast.makeText(
 										getApplicationContext(),
@@ -144,118 +147,44 @@ public class PutDataToRemoteActivity extends ActionBarActivity {
 	}
 
 	private void requestGetMyStories() {
-		final Bundle parameters = new KakaoStoryMyStoriesParamBuilder(
-				lastMyStoryId).build();
-		KakaoStoryService.requestGetMyStories(
-				new MyKakaoStoryHttpResponseHandler<MyStoryInfo[]>() {
-					@Override
+		final Bundle parameters = new KakaoStoryMyStoriesParamBuilder(lastMyStoryId).build();
+		KakaoStoryService.requestGetMyStories( new MyKakaoStoryHttpResponseHandler<MyStoryInfo[]>() {
+
+					@Override // 성공적으로 나의 스토리 Content를 가져왔을 때, myStories 변수가 18개의 최근 글을 갖고 있다.
 					protected void onHttpSuccess(final MyStoryInfo[] myStories) {
-						/*
-						 * Toast.makeText(getApplicationContext(),
-						 * "succeeded to get my posts from KakaoStory." +
-						 * "\ncount=" + myStories.length + "\nstories=" +
-						 * Arrays.toString(myStories),
-						 * Toast.LENGTH_SHORT).show();
-						 */
 						// myStories는 배열이다. 배열에 있는 데이터를 가져와서 원격 데이터베이스에 저장하자.
 
-						/*
-						 * { "1" : { "username" : "jaesikTest", "usercontents" :
-						 * "test}, "
-						 * 2" : { "username" : "lsetjlsk", "usercontents
-						 * " : "test"} }
-						 */
-
+						/* { "1" : { "username" : "jaesikTest", "usercontents" : "test}, "2" : { "username" : "lsetjlsk", "usercontents" : "test"} } */
 						JSONObject joOut = new JSONObject();
-						/*
-						 * JSONObject joIn1 = new JSONObject(); try {
-						 * joIn1.put("username", "jaesikTest");
-						 * joIn1.put("usercontents", "test"); joOut.put("1",
-						 * joIn1); } catch (JSONException e) { // TODO
-						 * Auto-generated catch block e.printStackTrace(); }
-						 */
-
-						// jsonMyStoriesInfo = "{";
-
 						Integer jsonNum = 1;
+						
+						// To categorize kind
 						String boardKind = null;
-						// With Tag
+
 						for (MyStoryInfo myStoryTem : myStories) {
-							// myStoryTem.getContent();
-							// Log.i("MainActivity", "Contents   ==>   " +
-							// myStoryTem.getContent());
-
-							if (jsonNum != 1) {
-								// jsonMyStoriesInfo = jsonMyStoriesInfo + ",";
-							}
-							// 카카오스토리에 있는 태그기능을 사용할 수 있을까?
 							if (myStoryTem.getContent() != null) {
-
 								// #카카오캠퍼스 태그 구분
 								if (myStoryTem.getContent().contains("#카카오캠퍼스")) {
-									JSONObject joIn = new JSONObject(); // joIn
-																		// should
-																		// be
-																		// repeat
+									JSONObject joIn = new JSONObject();
 
-									// #학교, #학부, #맛집, #대나무숲, #무럭무럭, #놀자, #꽃보다여행,
-									// #대학지침서, #나두근두근해, #너네이거알아?, #나요즘힘들어,
-									// #나이거싫어
+									// #학교, #학부, #맛집, #대나무숲, #무럭무럭, #놀자, #꽃보다여행, #대학지침서, #나두근두근해, #너네이거알아?, #나요즘힘들어, #나이거싫어
 									// 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
-
-									if (myStoryTem.getContent().contains("#학교")) {
-										boardKind = "1";
-									}
-
-									if (myStoryTem.getContent().contains("#학부")) {
-										boardKind = "2";
-									}
-
-									if (myStoryTem.getContent().contains("#맛집")) {
-										boardKind = "3";
-									}
-									if (myStoryTem.getContent().contains(
-											"#대나무숲")) {
-										boardKind = "4";
-									}
-									if (myStoryTem.getContent().contains(
-											"#무럭무럭")) {
-										boardKind = "5";
-									}
-									if (myStoryTem.getContent().contains("#놀자")) {
-										boardKind = "6";
-									}
-									if (myStoryTem.getContent().contains(
-											"#꽅보다여행")) {
-										boardKind = "7";
-									}
-									if (myStoryTem.getContent().contains(
-											"#대학지침서")) {
-										boardKind = "8";
-									}
-									if (myStoryTem.getContent().contains(
-											"#나두근두근해")) {
-										boardKind = "9";
-									}
-									if (myStoryTem.getContent().contains(
-											"#너네이거알아?")) {
-										boardKind = "10";
-									}
-									if (myStoryTem.getContent().contains(
-											"#나요즘힘들어")) {
-										boardKind = "11";
-									}
-									if (myStoryTem.getContent().contains(
-											"#나이거싫어")) {
-										boardKind = "12";
-									}
-
+									if (myStoryTem.getContent().contains("#학교")) { boardKind = "1"; }
+									if (myStoryTem.getContent().contains("#학부")) { boardKind = "2"; }
+									if (myStoryTem.getContent().contains("#맛집")) { boardKind = "3"; }
+									if (myStoryTem.getContent().contains( "#대나무숲")) { boardKind = "4"; }
+									if (myStoryTem.getContent().contains( "#무럭무럭")) { boardKind = "5"; }
+									if (myStoryTem.getContent().contains("#놀자")) { boardKind = "6"; }
+									if (myStoryTem.getContent().contains( "#꽅보다여행")) { boardKind = "7"; }
+									if (myStoryTem.getContent().contains( "#대학지침서")) { boardKind = "8"; }
+									if (myStoryTem.getContent().contains( "#나두근두근해")) { boardKind = "9"; }
+									if (myStoryTem.getContent().contains( "#너네이거알아?")) { boardKind = "10"; }
+									if (myStoryTem.getContent().contains( "#나요즘힘들어")) { boardKind = "11"; }
+									if (myStoryTem.getContent().contains( "#나이거싫어")) { boardKind = "12"; }
 									try {
 										// Id 및 내용 입력 파트
-										joIn.put("usercontents",
-												myStoryTem.getContent());
+										joIn.put("usercontents", myStoryTem.getContent());
 										joIn.put("kind", boardKind);
-										
 										joIn.put("kslink", myStoryTem.getUrl());
 
 										if (boardKind == "4") {
@@ -263,34 +192,18 @@ public class PutDataToRemoteActivity extends ActionBarActivity {
 										} else {
 											joIn.put("username", usernameIntent);
 										}
-
 										joOut.put(jsonNum.toString(), joIn);
 									} catch (JSONException e) {
 										e.printStackTrace();
 									}
-									
 									boardKind = null;
-
-									/*
-									 * jsonMyStoriesInfo = jsonMyStoriesInfo +
-									 * " \""+jsonNum +"\" : " +
-									 * "{ \"username\" : " + "\"jaesik\"," +
-									 * "\"usercontents\" : \"" +
-									 * myStoryTem.getContent() + "\" } ";
-									 */
-									// Log.i("MainActivity",
-									// "Contents filtered  ==>   " +
-									// myStoryTem.getContent());
 								}
 							}
 							jsonNum++;
 						}
-
-						// jsonMyStoriesInfo = jsonMyStoriesInfo + "}";
-
+						// jsonMyStoriesInfo에 json type data 저장
 						jsonMyStoriesInfo = joOut.toString();
-						// Log.i("MainActivity", jsonMyStoriesInfo);
-
+						// 원격 데이터베이스에 저장하기 위해서 HTTP POST를 사용할 수 있게 Async를 호출하는 method를 호출
 						jsonFunction();
 					}
 				}, parameters);
@@ -306,9 +219,7 @@ public class PutDataToRemoteActivity extends ActionBarActivity {
 	 * */
 	class CreateNewProduct extends AsyncTask<String, String, String> {
 
-		/**
-		 * Before starting background thread Show Progress Dialog
-		 * */
+		/*** Before starting background thread Show Progress Dialog **/
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
@@ -320,49 +231,17 @@ public class PutDataToRemoteActivity extends ActionBarActivity {
 			pDialog.show();
 		}
 
-		/**
-		 * Creating product
-		 * */
 		protected String doInBackground(String... args) {
-			Log.i("PutDataActivity",
-					"do In Background in CreateNewProduct class");
-			/*
-			 * String name = inputName.getText().toString(); String price =
-			 * inputPrice.getText().toString(); String description =
-			 * inputDesc.getText().toString();
-			 */
+			Log.i("PutDataActivity", "do In Background in CreateNewProduct class");
 
 			// Building Parameters
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
-			/*
-			 * params.add(new BasicNameValuePair("name", name)); params.add(new
-			 * BasicNameValuePair("price", price)); params.add(new
-			 * BasicNameValuePair("description", description));
-			 */
 
-			// 하나로 하자.. Json 하나로!
-			/*
-			 * try{ JSONObject objTest = new JSONObject(jsonMyStoriesInfo);
-			 * }catch(JSONException e){ e.printStackTrace(); }
-			 */
-			// Log.i("PutDataActivity", jsonMyStoriesInfo);
 			Log.i("PutDataActivity", jsonMyStoriesInfo);
 
-			// params.add(new BasicNameValuePair("jsonMyStoriesInfo",
-			// jsonMyStoriesInfo));
-			params.add(new BasicNameValuePair("jsonMyStoriesInfo",
-					jsonMyStoriesInfo));
+			params.add(new BasicNameValuePair("jsonMyStoriesInfo", jsonMyStoriesInfo));
 
-			// params.add(new BasicNameValuePair("username", "JaesikTest"));
-			// params.add(new BasicNameValuePair("usercontents",
-			// "contents test"));
-
-			// params.add(new BasicNameValuePair("description", description));
-
-			// getting JSON Object
-			// Note that create product url accepts POST method
-			JSONObject json = jsonParser.makeHttpRequest(url_create_product,
-					"POST", params);
+			JSONObject json = jsonParser.makeHttpRequest(url_save_kakaostory_data, "POST", params);
 
 			// check log cat fro response
 			Log.d("Create Response", json.toString());
@@ -372,28 +251,17 @@ public class PutDataToRemoteActivity extends ActionBarActivity {
 				int success = json.getInt(TAG_SUCCESS);
 
 				if (success == 1) {
-					// successfully created product
 					/*
 					 * Intent i = new Intent(getApplicationContext(),
 					 * AllProductsActivity.class); startActivity(i);
 					 */
-
-					Log.i("PutDataActivity",
-							"on Success in CreateNewProduct class");
-					// Log.i("putting data", "putting success");
-					// closing this screen
-					// finish();
-					// TextView jsonAnswerView = (TextView)
-					// findViewById(R.id.textView3);
-					// jsonAnswerView.setText(json.toString());
-
+					Log.i("PutDataActivity", "on Success in CreateNewProduct class");
 				} else {
-					// failed to create product
+					// failed to send data
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-
 			return null;
 		}
 
@@ -401,15 +269,14 @@ public class PutDataToRemoteActivity extends ActionBarActivity {
 		 * After completing background task Dismiss the progress dialog
 		 * **/
 		protected void onPostExecute(String file_url) {
-			Log.i("PutDataActivity",
-					"on Post Execute in CreateNewProduct class");
+			Log.i("PutDataActivity", "on Post Execute in CreateNewProduct class");
 			// dismiss the dialog once done
 			pDialog.dismiss();
+			// TabmenuActivity로 이동
 			Intent TabMenu = new Intent(getApplicationContext(), TabmenuActivity.class);
 			startActivity(TabMenu);
 			finish();
 		}
-
 	}
 
 	private abstract class MyKakaoStoryHttpResponseHandler<T> extends

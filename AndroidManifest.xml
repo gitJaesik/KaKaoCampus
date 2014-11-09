@@ -59,7 +59,6 @@
             android:name=".PutDataToRemoteActivity"
             android:label="@string/title_activity_put_data_to_remote" >
         </activity>
-        <activity android:name=".ActionTab"></activity>
         <activity android:name=".TabmenuActivity"></activity>
         <activity
             android:name=".SpringTimeBeatActivity"

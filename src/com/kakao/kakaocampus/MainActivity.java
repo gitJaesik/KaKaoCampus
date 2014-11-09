@@ -28,9 +28,6 @@ import com.kakao.UserManagement;
 import com.kakao.UserProfile;
 import com.kakao.helper.Logger;
 
-// To reduce code 
-//import com.kakao.kakaocampus.KakaoStoryMainActivity;
-
 public class MainActivity extends Activity {
     private String lastMyStoryId;
     private String jaesikStoryId = "_H5Pf5.IAeVGI06qW0";
@@ -60,25 +57,16 @@ public class MainActivity extends Activity {
 
 		initView();
 
-		/*
-		if (savedInstanceState == null) {
-			x = 50;
-		} else {
-			x = savedInstanceState.getInt("x");
-		}
-		y = 50;
-		*/
 	}
 	
 
 
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		//outState.putInt("x", x);
 	}
 	
 
-	// init view code ( button and alertDialog ) 
+	// initiate view code ( button and alertDialog ) 
 	public void initView(){
 
 		initButtonView();
@@ -129,21 +117,23 @@ public class MainActivity extends Activity {
 
 
 	private void callRequestMe() {
+		
+		// 사용자관리에 있는 데이터를 요청
 	    UserManagement.requestMe(new MeResponseCallback() {
 	        @Override
 	        protected void onSuccess(final UserProfile userProfile) {
-	            // 성공.
 	        	Map<String, String> kacamProperties = userProfile.getProperties();
 	        	userProfileNickName = userProfile.getNickname();
 
-	        	if(kacamProperties.get("university") != null && kacamProperties.get("phone") != null && kacamProperties.get("email") != null && kacamProperties.get("student_id") != null){
+	        	// 대학교, 전화번호, 이메일, 학번이 입력되어있으면 로그인
+	        	if(kacamProperties.get("university") != null && kacamProperties.get("phone") != null 
+	        			&& kacamProperties.get("email") != null && kacamProperties.get("student_id") != null){
 	        		Log.i("MainActivity", "사용자관리에 대학정보 입력 되어있음을 확인");
 	        	}else{
+	        	// 사용자관리가 입력되어있지 않으면 사용자 관리 작성 페이지로 이동
 	        		Intent intent = new Intent(getApplicationContext(), NewKaCamProfileActivity.class);	
 	        		startActivity(intent);
 	        	}
-	        	
-                //Log.i("MainActivity", "Get Profile From Kakao : " + userProfile.toString());
 	        }
 
 	        @Override
@@ -169,11 +159,11 @@ public class MainActivity extends Activity {
 	public void openAlert(){
 	      AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 	      alertDialogBuilder.setMessage(R.string.checkWannaShareText);
-	      alertDialogBuilder.setPositiveButton(R.string.positiveShare, 
-	      new DialogInterface.OnClickListener() {
+	      alertDialogBuilder.setPositiveButton(R.string.positiveShare, new DialogInterface.OnClickListener() {
 			
 	         @Override
 	         public void onClick(DialogInterface arg0, int arg1) {
+	        	 // 카카오스토리에 올려져 있는 게시글을 공유
 	        	 Intent putDataToRemoteActivity1 = new Intent(getApplicationContext(), PutDataToRemoteActivity.class);
 	        	 putDataToRemoteActivity1.putExtra("username", userProfileNickName);
 	        	 startActivity(putDataToRemoteActivity1);
@@ -181,11 +171,11 @@ public class MainActivity extends Activity {
 	         }
 	      });
 
-	      alertDialogBuilder.setNegativeButton(R.string.negativeShare, 
-	      new DialogInterface.OnClickListener() {
+	      alertDialogBuilder.setNegativeButton(R.string.negativeShare, new DialogInterface.OnClickListener() {
 				
 	         @Override
 	         public void onClick(DialogInterface dialog, int which) {
+	        	 // 컨텐츠를 볼 수 있는 페이지로 이동
 	        	 Intent tabmenugo = new Intent(getApplicationContext(), TabmenuActivity.class);
 	        	 startActivity(tabmenugo);
 	        	 finish();
